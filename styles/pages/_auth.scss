@@ -1,0 +1,39 @@
+.auth{
+
+    max-width: 600px;
+    margin: 10px auto;
+    margin-top: 3vh;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: $white;
+    box-shadow: $box_shadow;
+    .register{
+        display: block;
+    }
+    .label{
+        .ant-form-item-required{
+          float: left !important;
+        }
+        label{
+            float: left !important;
+        }
+      }
+  .otp{
+    .resend_button{
+      border: none;
+      outline: none;
+      color: $primary_color;
+      background-color: transparent;
+    }
+  }
+
+
+
+.g_auth{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  flex-direction: column;
+}
+}
