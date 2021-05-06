@@ -67,7 +67,7 @@ function GoogleAuth({from}) {
                     
                 )}
                 onSuccess={responseGoogle}
-                onFailure={() => alert("failed")}
+                onFailure={(err) => console.log(err)}
                 cookiePolicy={'single_host_origin'}
             />
             <SetPassword
