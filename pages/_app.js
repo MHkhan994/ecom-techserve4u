@@ -7,10 +7,9 @@ import { Provider } from 'react-redux';
 import App from 'next/app'
 import { createWrapper } from 'next-redux-wrapper'
 import store from '../store'
-import AuthAndAxiso from '../helper/auth'
+import AuthAndAxios from '../helper/auth'
 import {updateCart} from '../actions/cartActions'
-import {setPaymentMethods} from '../actions/generalActions'
-import ReactGA from 'react-ga';
+import {setPaymentMethods,config} from '../actions/generalActions'
 
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
@@ -20,26 +19,12 @@ NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());
 
 
-const configAnalytics=()=>{
-  let {general} = store.getState()
-  let {analytics} = general
-  if(analytics.ga && analytics.ga.isActive){
-    ReactGA.initialize(analytics.ga.id);
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }
-  if(analytics.pixel && analytics.pixel.isActive){
-    const ReactPixel =  require('react-facebook-pixel');
-    ReactPixel.default.init(analytics.pixel.id);
-  }
-
-}
-
 
 class MyApp extends App {
   componentDidMount(){
     store.dispatch(updateCart());
     store.dispatch(setPaymentMethods());
-    configAnalytics()
+    config()
   }
 
   render() {
@@ -56,4 +41,4 @@ class MyApp extends App {
 const makestore = () => store
 const wrapper = createWrapper(makestore)
 
-export default wrapper.withRedux(AuthAndAxiso(MyApp))
+export default wrapper.withRedux(AuthAndAxios(MyApp))

@@ -3,7 +3,6 @@ let init ={
     paymentMethods:[],
     categories:[],
     brands:[],
-    analytics:{}
 
 }
 
@@ -24,13 +23,7 @@ const generalData = (state=init, action)=>{
            ...state,
            brands:action.payload
         }
-        case "SET_ANALYTICS":
-       return{
-           ...state,
-           analytics:action.payload
-        }
       
-        
         default:
             return state;
     }

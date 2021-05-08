@@ -45,18 +45,6 @@ const fetchBrands = () => {
     })
 }
 
-const fetchAnalytics=()=>{
-  axios.get('/settings/analytics')
-  .then(res=>{
-    store.dispatch({
-      type:"SET_ANALYTICS",
-      payload:res.data.analytics
-    })
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
 
 const AuthAndAxiso = (AuthComponent) => {
   return class Authenticated extends Component {
@@ -92,7 +80,6 @@ const AuthAndAxiso = (AuthComponent) => {
       configureAxiosHeader();
       fetchCategories()
       fetchBrands()
-      fetchAnalytics()
 
       const token = Cookies.get("ecom")
       //console.log(token);

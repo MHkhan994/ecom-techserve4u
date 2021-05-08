@@ -191,8 +191,8 @@ const Register = () => {
         <>
             <div className="otp">
                 <div className="text-center pt-3">
-                    <h1> Phone Verification</h1>
-                    <p>Verification code has been sent. Please wait a few minutes.</p>
+                    <h1> Email Verification</h1>
+                    <p>Verification code has been sent to you email. Please wait a few minutes.</p>
                     {/* <button onChange={()=>resendOtp()} className="resend_button">Resend Code</button> */}
                     {
                         mount && <Countdown
