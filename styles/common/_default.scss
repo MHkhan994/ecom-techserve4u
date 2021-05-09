@@ -80,3 +80,10 @@ button:focus {
 a:hover{
   text-decoration: none;
 }
+.background_white{
+  background-color: $white;
+    padding: 10px;
+    box-shadow: $box_shadow;
+    border-radius: 5px;
+    margin: 0 1vw;
+}

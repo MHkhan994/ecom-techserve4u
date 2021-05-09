@@ -2,19 +2,21 @@
 import axios from 'axios'
 import ReactGA from 'react-ga';
 
-  export const setPaymentMethods = (payload) => {
-    return async (dispatch) => {
-       let res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/settings/getactivemethod`)
+  // export const setPaymentMethods = (payload) => {
+  //   return async (dispatch) => {
+  //      let res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/settings/getactivemethod`)
 
-       if (res.data.success){
-            dispatch({
-                type:"SET_PAYMENT_METHODS",
-                payload:res.data.methods
-            })
-       }
+  //      if (res.data.success){
+  //           dispatch({
+  //               type:"SET_PAYMENT_METHODS",
+  //               payload:res.data.methods
+  //           })
+  //      }
         
-      };
-  };
+  //     };
+  // };
+
+
 
 
   export const  config=()=>{

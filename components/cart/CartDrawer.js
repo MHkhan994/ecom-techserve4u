@@ -71,7 +71,7 @@ export default function CartDrawer({ cartState, onCloseCart }) {
         })
       
 
-        setShippingCost(items.reduce(function (acc, obj) { return acc +parseInt( obj.shipping.cost.insideDhaka||0) }, 0))
+        setShippingCost(items.reduce(function (acc, obj) { return acc +parseInt(obj.shipping?.cost||0) }, 0))
     }, [cartItems])
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ProductTab from './ProductTab';
-import ShareThis from '../../components/sharethis';
+import ShareThis from '../sharethis';
 import { Select, Button, notification, Divider, Space, Empty } from 'antd';
 
 import { useDispatch } from 'react-redux'
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Router from 'next/router'
 
 import SliderImage from 'react-zoom-slider';
-import { notificationFunc } from '../../components/global/notification'
+import { notificationFunc } from '../global/notification'
 
 
 const { Option } = Select;
@@ -344,7 +344,7 @@ function ProductInfo({ product, campDiscount }) {
     return (
         <>
            <div className="col-md-9 col-sm-12">
-                <div className="row ">
+                <div className="row background_white">
                     <div className="col-md-6 col-sm-12 product_image">
                         <div className="row">
 

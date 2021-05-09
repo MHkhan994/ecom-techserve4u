@@ -9,7 +9,7 @@ import { createWrapper } from 'next-redux-wrapper'
 import store from '../store'
 import AuthAndAxios from '../helper/auth'
 import {updateCart} from '../actions/cartActions'
-import {setPaymentMethods,config} from '../actions/generalActions'
+import {config} from '../actions/generalActions'
 
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
@@ -23,7 +23,6 @@ Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on(
 class MyApp extends App {
   componentDidMount(){
     store.dispatch(updateCart());
-    store.dispatch(setPaymentMethods());
     config()
   }
 

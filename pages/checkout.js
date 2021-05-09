@@ -19,18 +19,17 @@ import OrderSummary from '../components/checkout/OrderSummary.js'
 
 function checkout() {
     const { open, cartItems } = useSelector(state => state.cart)
-    const { paymentMethods } = useSelector(state => state.general)
+    const { addresses } = useSelector(state => state.general)
     const { isAuthenticated } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [step, setStep] = useState(1)
 
     const [selectedAddress, setSelectedAddress] = useState(false)
-    const [addresses, setAddresses] = useState([]);
+    const [paymentMethods, setPaymentMethods] = useState([]);
 
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("cod")
     const [shippingCost, setShippingCost] = useState(0)
-    const [orderHistories, setOrderHistories] = useState([{ type: "pending", note: "Your order placed successfully" }])
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(true)
 
     const [isLodingOrder, setIsLodingOrder] = useState(false)
@@ -40,16 +39,15 @@ function checkout() {
     const [transactionId, setTransactionId] = useState("")
 
 
-    useEffect(() => {
-        axios
-            .get("/address/getaddress")
-            .then((res) => {
-                setAddresses(res.data.addresses);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+useEffect(() => {
+    axios.get(`/settings/getactivemethod`)
+    .then(res=>{
+        setPaymentMethods(res.data.methods)
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}, [])
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -69,6 +67,19 @@ function checkout() {
         setTransactionId("")
         setMethod(null)
     };
+
+    const checkToOrder = () => {
+        if (selectedPaymentMethod === "venmo" || selectedPaymentMethod === "cashApp" || selectedPaymentMethod === 'zelle') {
+            let filtered = paymentMethods.filter(m => m.name === selectedPaymentMethod)[0]
+            setMethod(filtered)
+            showModal()
+        } else {
+            handleConfirmOrder()
+        }
+
+    }
+
+
     const getTotalAmount = () => {
         return cartItems && Object.keys(cartItems).reduce((totalPrice, key) => {
             const { price, qty } = cartItems[key];
@@ -79,16 +90,7 @@ function checkout() {
         }, 0)
     }
 
-    const checkToOrder = () => {
-        if (selectedPaymentMethod === "Bkash" || selectedPaymentMethod === "Nagad") {
-            let filtered = paymentMethods.filter(m => m.name === selectedPaymentMethod)[0]
-            setMethod(filtered)
-            showModal()
-        } else {
-            handleConfirmOrder()
-        }
 
-    }
 
     const handleConfirmOrder = (transactionId) => {
         setIsLodingOrder(true)
@@ -128,7 +130,6 @@ function checkout() {
             orderStatus: "pending",
             tax,
             shipping: shippingCost,
-            orderHistories,
             transactionId: transactionId || ""
 
         }
@@ -141,12 +142,12 @@ function checkout() {
                     dispatch({
                         type: "RESET_CART"
                     })
-                    // setStep(step => step + 1)
-                    //setIsPaymentSuccess(true)
+                    setStep(step => step + 1)
+                    setIsPaymentSuccess(true)
                     if (res.data.url) {
                         return window.location.href = res.data.url
                     } else {
-                        Router.push('/user/profile?tab=orders')
+                        Router.push('/orders')
                     }
                     setIsLodingOrder(false)
                 }
@@ -166,19 +167,8 @@ function checkout() {
         var items = Object.keys(cartItems).map(key => {
             return cartItems[key];
         })
-
-
-        if (selectedAddress) {
-            let { region } = addresses.filter(a => a._id === selectedAddress)[0]
-            if (region !== "dhaka") {
-                setShippingCost(items.reduce(function (acc, obj) { return acc + parseInt(obj.shipping.cost.outsideDhaka || 0) }, 0))
-            } else {
-                setShippingCost(items.reduce(function (acc, obj) { return acc + parseInt(obj.shipping.cost.insideDhaka || 0) }, 0))
-            }
-        } else {
-            setShippingCost(items.reduce(function (acc, obj) { return acc + parseInt(obj.shipping.cost.insideDhaka || 0) }, 0))
-        }
-    }, [selectedAddress, cartItems])
+        setShippingCost(items.reduce(function (acc, obj) { return acc + parseInt(obj.shipping?.cost || 0) }, 0))
+    }, [cartItems])
 
     return (
 
@@ -201,7 +191,7 @@ function checkout() {
                     ]}
                 >
                     {
-                        method && <p> এই({method && method.bkashNumber || method.nagadNumber}) নাম্বারে {getTotalAmount()} টাকা {method.transactionType == "cashin" ? "Cash In" : "Cash Out"} করুন এবং আপনার Trx Id লিখুন</p>
+                        method && <p> {method.text}</p>
 
                     }
                     <Input value={transactionId} onChange={e => setTransactionId(e.target.value)} type="text" placeholder={`Enter your ${selectedPaymentMethod} transaction id`}></Input>
@@ -231,6 +221,7 @@ function checkout() {
                                         }}
                                     /> :
                                         step === 3 ? <PaymentMethod
+                                        paymentMethods={paymentMethods}
                                         addressId={selectedAddress}
                                         shippingCost={shippingCost}
                                             isLoading={isLodingOrder}

@@ -51,12 +51,16 @@ function Address({onStepChange,selectedAddress,setSelectedAddress,addresses,setA
                                             <span className="strong-600 ml-2">{address.mobileNumber}</span>
                                         </div>
                                         <div>
-                                            <span className="alpha-6">Region:</span>
-                                            <span className="strong-600 ml-2">{address.region}</span>
+                                            <span className="alpha-6">State:</span>
+                                            <span className="strong-600 ml-2">{address.state}</span>
                                         </div>
                                         <div>
-                                            <span className="alpha-6">Area:</span>
-                                            <span className="strong-600 ml-2">{address.area}</span>
+                                            <span className="alpha-6">City:</span>
+                                            <span className="strong-600 ml-2">{address.city}</span>
+                                        </div>
+                                        <div>
+                                            <span className="alpha-6">Zip:</span>
+                                            <span className="strong-600 ml-2">{address.zip}</span>
                                         </div>
                                         <div>
                                             <span className="alpha-6">Address:</span>

@@ -10,9 +10,8 @@ const radioStyle = {
 };
 
 
-function PaymentMethod({ onStepChange,onChangeMethod,selectedPaymentMethod,handleConfirmOrder,isLoading,shippingCost,addressId}) {
+function PaymentMethod({ onStepChange,onChangeMethod,selectedPaymentMethod,handleConfirmOrder,isLoading,shippingCost,addressId,paymentMethods}) {
   
-  const {paymentMethods} = useSelector(state => state.general)
   const [loaded, setLoaded] = useState(false);
 
 
@@ -27,7 +26,12 @@ function PaymentMethod({ onStepChange,onChangeMethod,selectedPaymentMethod,handl
             return(
               
               <Radio key={index} style={radioStyle} value={method.name}>
-                {method.name === 'cod' ? "Cash On Delivery":method.name==="ssl"?"Sslcommerz":method.name}
+                {method.name === 'cod' ? "Cash On Delivery":
+                method.name==="paypal"?"Paypal":
+                method.name === 'venmo'?'Venmo':
+                method.name === 'cashApp'?"Cash App":
+                method.name === 'zelle'?"Zelle":method.name
+                }
                 
                 
             </Radio>
@@ -36,12 +40,7 @@ function PaymentMethod({ onStepChange,onChangeMethod,selectedPaymentMethod,handl
           })
         }
        </Radio.Group>
-          {/* <Radio style={radioStyle} value="bkash">
-            Bkash
-        </Radio>
-          <Radio style={radioStyle} value="nagad">
-           Nagad
-        </Radio> */}
+    
 
       </div>
       <div className='d-flex justify-content-between my-3 mt-5'>

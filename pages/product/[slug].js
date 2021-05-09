@@ -6,7 +6,7 @@ import { Empty } from 'antd';
 
 import LatestProducts from '../../components/Home/LatestProducts';
 import { NextSeo } from 'next-seo';
-import ProductInfo from '../../components/product-details/producrDetails';
+import ProductInfo from '../../components/product-details/productDetails';
 import SideInfo from '../../components/product-details/SideInfo';
 
 

@@ -1,6 +1,6 @@
 
 let init ={
-    paymentMethods:[],
+    addresses:[],
     categories:[],
     brands:[],
 
@@ -8,10 +8,10 @@ let init ={
 
 const generalData = (state=init, action)=>{
     switch (action.type) {
-        case "SET_PAYMENT_METHODS":
+        case "SET_ADDRESSES":
        return{
            ...state,
-           paymentMethods:action.payload
+           addresses:action.payload
         }
         case "SET_CATEGORIES":
        return{

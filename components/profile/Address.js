@@ -3,25 +3,17 @@ import axios from 'axios'
 import { Table, Space, Popconfirm, message } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import AddressModal from '../adressModal/AddressModal';
+import {useSelector} from 'react-redux'
 
 
 
 
 
 function Address() {
-    const [addresses, setAddresses] = useState([]);
+    const { addresses } = useSelector(state => state.general)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
-    useEffect(() => {
-        axios
-            .get("/address/getaddress")
-            .then((res) => {
-                setAddresses(res.data.addresses);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+
     const handleCancel = () => {
         setIsModalVisible(false);
         setSelectedAddress(null)
@@ -67,14 +59,19 @@ function Address() {
             key: 'mobileNumber',
         },
         {
-            title: 'Region',
-            dataIndex: 'region',
-            key: 'region',
+            title: 'State',
+            dataIndex: 'state',
+            key: 'state',
         },
         {
-            title: 'Area',
-            dataIndex: 'area',
-            key: 'area',
+            title: 'City',
+            dataIndex: 'city',
+            key: 'city',
+        },
+        {
+            title: 'Zip',
+            dataIndex: 'zip',
+            key: 'zip',
         },
         {
             title: 'Address',

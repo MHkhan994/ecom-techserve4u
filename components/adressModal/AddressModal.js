@@ -1,5 +1,5 @@
-import React, { useState ,useEffect} from 'react'
-import { Button, Modal, Form, Input, Radio, Select ,} from 'antd';
+import React, { useState, useEffect } from 'react'
+import { Button, Modal, Form, Input, Radio, Select, } from 'antd';
 const { Option } = Select;
 import axios from 'axios'
 import zIndex from '@material-ui/core/styles/zIndex';
@@ -12,23 +12,25 @@ const layout = {
     },
 };
 
-function AddressModal({ isModalVisible, handleCancel ,sendData,selectedAddress,sendUpdatedData}) {
+let states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
+
+function AddressModal({ isModalVisible, handleCancel, sendData, selectedAddress, sendUpdatedData }) {
     const [form] = Form.useForm();
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     const [editId, setEditId] = useState(null)
 
-    const save=(values)=>{
+    const save = (values) => {
         setLoading(true)
         axios.post('/address/create', values)
             .then(res => {
-                if(res.data.success){
+                if (res.data.success) {
                     sendData(res.data.address);
                     form.resetFields();
                     setLoading(false)
                     handleCancel()
                 }
-               
+
             })
             .catch(err => {
                 console.log(err);
@@ -37,17 +39,17 @@ function AddressModal({ isModalVisible, handleCancel ,sendData,selectedAddress,s
             })
     }
 
-    const update=(id,values)=>{
+    const update = (id, values) => {
         setLoading(true)
-        axios.patch('/address/update/'+id, values)
+        axios.patch('/address/update/' + id, values)
             .then(res => {
-                if(res.data.success){
+                if (res.data.success) {
                     sendUpdatedData(res.data.address);
                     form.resetFields();
                     setLoading(false)
                     handleCancel()
                 }
-               
+
             })
             .catch(err => {
                 console.log(err);
@@ -56,43 +58,43 @@ function AddressModal({ isModalVisible, handleCancel ,sendData,selectedAddress,s
             })
     }
 
-    
+
 
     const onCreate = (values) => {
-       if(editId){
-          
-        update(editId,values)
-       }else{
-           save(values)
-       }
-       
+        if (editId) {
+
+            update(editId, values)
+        } else {
+            save(values)
+        }
+
     }
 
-useEffect(() => {
-   if(selectedAddress){
-       form.setFieldsValue(selectedAddress)
-       setEditId(selectedAddress._id)
-   }else{
-    form.resetFields();
-    setEditId(null)
-   }
-}, [selectedAddress])
+    useEffect(() => {
+        if (selectedAddress) {
+            form.setFieldsValue(selectedAddress)
+            setEditId(selectedAddress._id)
+        } else {
+            form.resetFields();
+            setEditId(null)
+        }
+    }, [selectedAddress])
 
 
     return (
         <>
             <Modal
-            confirmLoading={loading}
+                confirmLoading={loading}
                 visible={isModalVisible}
-                title={editId?"Update Address":"Add New Address"}
-                okText={editId?"Update":"Create"}
+                title={editId ? "Update Address" : "Add New Address"}
+                okText={editId ? "Update" : "Create"}
                 cancelText="Cancel"
                 onCancel={handleCancel}
                 zIndex={1111}
                 onOk={() => {
                     form
                         .validateFields()
-                        .then((values) => {                
+                        .then((values) => {
                             onCreate(values);
                         })
                         .catch((info) => {
@@ -109,6 +111,7 @@ useEffect(() => {
                         modifier: 'public',
                     }}
                     className='address_modal'
+                    autoComplete={false}
                 >
                     <Form.Item
                         name="name"
@@ -127,16 +130,16 @@ useEffect(() => {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name="region"
-                        label="Region"
-                        validateStatus={error && error.region ? "error" : "succcess"}
-                        help={error && error.region ? error.region : null}
+                        name="state"
+                        label="State"
+                        validateStatus={error && error.state ? "error" : "succcess"}
+                        help={error && error.state ? error.state : null}
                     >
                         <Select
-                            dropdownStyle={{zIndex:11111}}
+                            dropdownStyle={{ zIndex: 11111 }}
                             showSearch
                             style={{ width: "100%", zIndex: 5 }}
-                            placeholder="Select a region"
+                            placeholder="Select a state"
                             optionFilterProp="children"
                             filterOption={(input, option) =>
                                 option.props.children
@@ -145,22 +148,27 @@ useEffect(() => {
                             }
                             getPopupContainer={node => node.parentNode}
                         >
-                            <Option  value="barishal">Barishal</Option>
-                            <Option value="chittagonj">Chittagonj</Option>
-                            <Option value="dhaka">Dhaka</Option>
-                            <Option value="khulna">Khulna</Option>
-                            <Option value="rajshahi">Rajshahi</Option>
-                            <Option value="rangpur">Rangpur</Option>
-                            <Option value="sylhet">Sylhet</Option>
-                            <Option value="mymensingh">Mymensingh</Option>
-                          
+                            {
+                                states.map((state, index) => (
+                                    <Option key={index} value={state}>{state}</Option>
+                                ))
+                            }
+
                         </Select>
                     </Form.Item>
                     <Form.Item
-                        name="area"
-                        label="Area"
-                        validateStatus={error && error.area ? "error" : "succcess"}
-                        help={error && error.area ? error.area : null}
+                        name="city"
+                        label="City"
+                        validateStatus={error && error.city ? "error" : "succcess"}
+                        help={error && error.city ? error.city : null}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="zip"
+                        label="Zip Code"
+                        validateStatus={error && error.zip ? "error" : "succcess"}
+                        help={error && error.zip ? error.zip : null}
                     >
                         <Input />
                     </Form.Item>
@@ -169,15 +177,10 @@ useEffect(() => {
                         label="Address"
                         validateStatus={error && error.address ? "error" : "succcess"}
                         help={error && error.address ? error.address : null}
+                       
                     >
-                        <Input.TextArea />
+                        <Input.TextArea  placeholder="Street address,apt,suite,building,floor,etc." />
                     </Form.Item>
-                    {/* <Form.Item name="modifier" className="collection-create-form_last-form-item">
-                        <Radio.Group>
-                            <Radio value="public">Public</Radio>
-                            <Radio value="private">Private</Radio>
-                        </Radio.Group>
-                    </Form.Item> */}
                 </Form>
             </Modal>
         </>

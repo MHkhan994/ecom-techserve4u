@@ -45,6 +45,20 @@ const fetchBrands = () => {
     })
 }
 
+const fetchAddresses=()=>{
+  axios
+  .get("/address/getaddress")
+  .then((res) => {
+      store.dispatch({
+        type: "SET_ADDRESSES",
+        payload: res.data.addresses
+      })
+  })
+  .catch((err) => {
+      console.log(err);
+  });
+}
+
 
 const AuthAndAxiso = (AuthComponent) => {
   return class Authenticated extends Component {
@@ -80,6 +94,7 @@ const AuthAndAxiso = (AuthComponent) => {
       configureAxiosHeader();
       fetchCategories()
       fetchBrands()
+      
 
       const token = Cookies.get("ecom")
       //console.log(token);
@@ -91,7 +106,7 @@ const AuthAndAxiso = (AuthComponent) => {
           .then((res) => {
             if (res.status === 200 && res.data.success) {
               //do some change state
-              console.log(res.data.user);
+              fetchAddresses()
               this.setState({ userData: res.data.user });
               this.setState({ isLoading: false });
               store.dispatch({
