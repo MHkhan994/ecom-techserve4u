@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import Link from "next/link";
-
+import Rating from '@material-ui/lab/Rating';
 function CampCard({ product ,_id}) {
     const [discount, setDiscount] = useState(null)
     
@@ -43,11 +43,8 @@ function CampCard({ product ,_id}) {
                 <a>
                     <div className="product_info">
                         <div className="rating">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
+                        <Rating size="small" precision={0.5} readOnly  defaultValue={0} value={product.average} />
+                        <span className='count'>({product.ratingCount||0})</span>
                         </div>
                         <h5>{product?.name ? product.name : "Product name"}</h5>
 
@@ -55,22 +52,22 @@ function CampCard({ product ,_id}) {
                             {
                                 discount?.value > 0 ?
                                     <>
-                                        <span className="old-price">${product.price}</span>
+                                        <span className="old-price">৳{product.price}</span>
                                         {
                                             discount.discountType === 'flat' ?
-                                            <span className="new-price">${product.price-discount.value}</span>:
-                                            <span className="new-price">${product.price-Math.floor((product.price*(discount.value/100)))}</span>
+                                            <span className="new-price">৳{product.price-discount.value}</span>:
+                                            <span className="new-price">৳{product.price-Math.floor((product.price*(discount.value/100)))}</span>
                                         }
                                         
                                     </>:
-                                    <span className="new-price">${product.price}</span>
+                                    <span className="new-price">৳{product.price}</span>
                             }
 
 
                         </div>
 
 
-                        {/* <span>$ {product?.price ? product.price : "1200"}</span> */}
+                        {/* <span>৳ {product?.price ? product.price : "1200"}</span> */}
                     </div>
                 </a>
             </Link>

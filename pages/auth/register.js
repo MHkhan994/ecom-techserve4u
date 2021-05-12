@@ -151,7 +151,7 @@ const Register = () => {
             axios.post('/user/verifyotp', { email, otp })
                 .then(res => {
                     if (res.data.success) {
-                        Cookies.set("ecom", res.data.token);
+                        Cookies.set("myshop_auth2", res.data.token);
                         notificationFunc("success", "Registered successfully")
                         setTimeout(() => {
                             window.location.pathname = '/'

@@ -11,10 +11,10 @@ export const addToCart = (product, newQty) => {
       //console.log('action::products', products);
       //const product = action.payload.product;
       //const products = state.products;
-      const qty = cartItems[product._id]
-        ? parseInt(cartItems[product._id].qty + newQty)
+      const qty = cartItems[product.productId]
+        ? parseInt(cartItems[product.productId].qty + newQty)
         : newQty;
-      cartItems[product._id] = {
+      cartItems[product.productId] = {
        ...product,
         qty,
       };
@@ -67,7 +67,7 @@ export const addToCart = (product, newQty) => {
             purchasedQty: cartItems[key].qty,
             variations: cartItems[key].attributes,
             campaign: cartItems[key].campaign,
-            _id: cartItems[key]._id
+            productId: cartItems[key].productId
         }))
 
         console.log(items);

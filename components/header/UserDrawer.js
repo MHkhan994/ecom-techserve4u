@@ -35,7 +35,7 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
 
 
     const handleLogout = () => {
-        Cookies.remove("myshop_auth");
+        Cookies.remove("myshop_auth2");
         window.location.pathname = '/'
     }
 
@@ -46,7 +46,7 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
             <Drawer anchor={"left"} open={userDrawerState} onClose={onCloseUserDrawer()}>
                 <div className="user_drawer_header">
                     <div className="avatar">
-                        <img src="https://via.placeholder.com/80" alt="" />
+                        <img src={user.profilePicture||"https://via.placeholder.com/80"} alt="" />
                         <div className='name_mobile'>
                             <p>{user.name}</p>
                             <span>{user.mobile}</span>

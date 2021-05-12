@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Rating from '@material-ui/lab/Rating';
 
 function ProductCard({ product }) {
     //console.log(product);
@@ -32,11 +33,8 @@ function ProductCard({ product }) {
                 <a>
                     <div className="product_info">
                         <div className="rating">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
+                        <Rating size="small" precision={0.5} readOnly  defaultValue={0} value={product.average} />
+                        <span className='count'>({product.ratingCount||0})</span>
                         </div>
                         <h5>{product?.name ? product.name : "Product name"}</h5>
 

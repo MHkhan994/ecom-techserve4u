@@ -4,7 +4,7 @@ import AddressModal from "../adressModal/AddressModal";
 import axios from "axios";
 import Link from 'next/link'
 
-function Address({onStepChange,selectedAddress,setSelectedAddress,addresses,setAddresses}) {
+function Address({onStepChange,selectedAddress,setSelectedAddress,addresses}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     
@@ -28,7 +28,6 @@ function Address({onStepChange,selectedAddress,setSelectedAddress,addresses,setA
             <AddressModal
                 isModalVisible={isModalVisible}
                 handleCancel={handleCancel}
-                sendData={setAddresses}
 
             />
             <h5 className="heading">Your Address</h5>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import ReactHtmlParser from 'react-html-parser'
+import Reviews from './Reviewss';
 
-function ProductTab({description, tags}) {
+function ProductTab({description, tags,productId}) {
    
     const [key, setKey] = useState('description');
     return (
@@ -17,9 +18,9 @@ function ProductTab({description, tags}) {
                         description ? ReactHtmlParser(description) :"No descriptions found"
                     }
                 </Tab>
-                {/* <Tab eventKey="reviews" title="Reviews">
-                    reviews goes here
-                </Tab> */}
+                <Tab eventKey="reviews" title="Reviews">
+                   <Reviews productId={productId} />
+                </Tab>
                 <Tab eventKey="tags" title="Tags">
                     {tags?tags.join(","):"No tags found"} 
                 </Tab>

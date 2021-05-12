@@ -111,7 +111,7 @@ useEffect(() => {
             purchasedQty: cartItems[key].qty,
             variations: cartItems[key].attributes,
             campaign: cartItems[key].campaign,
-            _id: cartItems[key]._id
+            productId: cartItems[key].productId
         }))
 
         let tax = cartItems && Object.keys(cartItems).reduce((totalPrice, key) => {

@@ -14,7 +14,7 @@ function MobileHeader({ setUserDrawerOpen }) {
 
                     <Link href='/'>
                         <a>
-                            <span> DCEL</span>
+                        <img src='/logo.png'></img>
                         </a>
                     </Link>
                 </div>

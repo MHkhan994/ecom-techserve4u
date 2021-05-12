@@ -4,10 +4,10 @@ import Header from '../../components/header/Header'
 import axios from 'axios'
 import { Empty } from 'antd';
 
-import LatestProducts from '../../components/Home/LatestProducts';
 import { NextSeo } from 'next-seo';
 import ProductInfo from '../../components/product-details/productDetails';
 import SideInfo from '../../components/product-details/SideInfo';
+import RelatedProducts from '../../components/product-details/RElatedProducts';
 
 
 
@@ -51,8 +51,8 @@ function ProductDeatils({ product, campDiscount }) {
             <div id="product_details">
                 {
                     product && <NextSeo
-                        title={product.name}
-                        description="This is react js ecommerce website"
+                        title={product.meta?.title || product.name}
+                        description={product.meta.description || product.description}
                         canonical="https://dcel.xyz/"
                         openGraph={{
                             url: 'https://dcel.xyz/',
@@ -60,7 +60,7 @@ function ProductDeatils({ product, campDiscount }) {
                             description: 'This is react js ecommerce website',
                             images: [
                                 {
-                                    url: product.thumbnail,
+                                    url:product.meta.image || product.thumbnail,
                                     width: 800,
                                     height: 600,
                                     alt: 'Og Image Alt',
@@ -91,7 +91,7 @@ function ProductDeatils({ product, campDiscount }) {
                         </div>
                         <div className="row  p-0">
                             <div className="col-12 my-5">
-                                <LatestProducts title="Related products" array={relatedProducts} hidetitle={true} />
+                                <RelatedProducts title="Related products" array={relatedProducts} />
                             </div>
                         </div>
                     </div>

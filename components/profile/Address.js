@@ -107,7 +107,6 @@ function Address() {
             <AddressModal
                 isModalVisible={isModalVisible}
                 handleCancel={handleCancel}
-                sendData={(data) => setAddresses(prev => [...prev, data])}
                 selectedAddress={selectedAddress}
                 sendUpdatedData={(data) => handleUpdatedData(data)}
 

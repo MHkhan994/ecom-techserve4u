@@ -66,9 +66,11 @@
         }
 
         .rating {
-            i {
-                font-size: 10px;
-                color: #FEC42D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .count{
+                color:$light_gray_2;
             }
         }
 

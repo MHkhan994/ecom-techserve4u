@@ -66,6 +66,9 @@
         a {
           text-decoration: none;
           color: $dark_gray;
+          img{
+            height: 50px;
+          }
           @media (max-width: 700px) {
             display: none;
           }
@@ -412,10 +415,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 10px;
-      .mobile_logo span{
-        font-weight: 600;
-        font-size: 20px;
-        color: $dark_gray;
+      .mobile_logo img{
+        height: 40px;
       }
       .fas{
         font-size: 20px;

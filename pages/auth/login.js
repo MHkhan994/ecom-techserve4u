@@ -23,7 +23,7 @@ const Login = () => {
     axios.post('/user/signin', values)
       .then(res => {
         if (res.status === 200) {
-          Cookies.set("ecom", res.data.token);
+          Cookies.set("myshop_auth2", res.data.token);
           notificationFunc("success", "login success")
           setTimeout(() => {
             window.location.pathname = '/'

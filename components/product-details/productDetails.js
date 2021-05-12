@@ -10,7 +10,7 @@ import Router from 'next/router'
 
 import SliderImage from 'react-zoom-slider';
 import { notificationFunc } from '../global/notification'
-
+import Rating from '@material-ui/lab/Rating';
 
 const { Option } = Select;
 
@@ -46,14 +46,14 @@ function ProductInfo({ product, campDiscount }) {
     const [campaign, setCampaign] = useState(null)
 
 
-  
 
-  
+
+
 
 
     const setProductForCart = (prod) => {
         let item = {
-            _id: prod._id,
+            productId: prod._id,
             thumbnail: prod.thumbnail,
             name: prod.name,
             attributes,
@@ -343,7 +343,7 @@ function ProductInfo({ product, campDiscount }) {
 
     return (
         <>
-           <div className="col-md-9 col-sm-12">
+            <div className="col-md-9 col-sm-12">
                 <div className="row background_white">
                     <div className="col-md-6 col-sm-12 product_image">
                         <div className="row">
@@ -363,17 +363,13 @@ function ProductInfo({ product, campDiscount }) {
                     </div>
                     <div className="col-md-6 col-sm-12 product_info mt-3">
                         <h1 className='product_name text-capitalize'>{product.name}</h1>
-                        {/* <div className="review">
+                        <div className="review">
                             <span>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
+                                <Rating size="small" precision={0.5} readOnly defaultValue={0} value={product.average} />
                             </span>
-                            <span >(5 reviews)</span>
+                            <span >({product.ratingCount || 0} reviews)</span>
 
-                        </div> */}
+                        </div>
                         <div className="sku"><span className="key">SKU: </span> <span>{product?.sku ? product.sku : "N/A"}</span></div>
                         <div className="price">
                             {
@@ -398,7 +394,7 @@ function ProductInfo({ product, campDiscount }) {
                         </div>}
                         <div className="brand">
                             <span className="key"> Brand: </span>
-                            <span>{product?.brand ? product.brand.name : "N/A"}</span>
+                            <span>{product?.brand[0] ? product.brand[0]?.name : "N/A"}</span>
                         </div>
                         <div className="attributes">
                             {
@@ -468,7 +464,7 @@ function ProductInfo({ product, campDiscount }) {
 
                 <div className="row">
                     <div className="col-12 my-5">
-                        <ProductTab description={product.description} tags={product.tags} />
+                        <ProductTab productId={product._id} description={product.description} tags={product.tags} />
                     </div>
 
 

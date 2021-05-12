@@ -105,7 +105,7 @@ export default function Header() {
                         <div className="main_container">
                             <div className="logo">
                                 <i onClick={() => setUserDrawerOpen(true)} className="fas fa-bars mr-3"></i>
-                                <Link href="/"><a>DCEL Ecom.</a></Link>
+                                <Link href="/"><a><img src='/logo.png'></img></a></Link>
                             </div>
                            
 

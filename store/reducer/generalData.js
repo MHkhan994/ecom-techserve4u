@@ -13,6 +13,11 @@ const generalData = (state=init, action)=>{
            ...state,
            addresses:action.payload
         }
+        case "ADD_NEW_ADDRESSES":
+       return{
+           ...state,
+           addresses:[action.payload,...state.addresses]
+        }
         case "SET_CATEGORIES":
        return{
            ...state,

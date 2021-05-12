@@ -9,7 +9,7 @@ import store from "../store";
 
 const configureAxiosHeader = () => {
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
-  const token = Cookies.get("ecom");
+  const token = Cookies.get("myshop_auth2");
   if (token) {
     axios.defaults.headers.common = {
       Authorization: token,
@@ -96,7 +96,7 @@ const AuthAndAxiso = (AuthComponent) => {
       fetchBrands()
       
 
-      const token = Cookies.get("ecom")
+      const token = Cookies.get("myshop_auth2")
       //console.log(token);
       if (token) {
         this.setState({ isLoading: true });
@@ -119,7 +119,7 @@ const AuthAndAxiso = (AuthComponent) => {
           .catch((err) => {
             this.setState({ isLoading: false });
             err && err.response && console.log(err.response.data.error, "error")
-            Cookies.remove("ecom");
+            Cookies.remove("myshop_auth2");
             err && err.response.data && err.response.data.error && alert(err.response.data.error)
             store.dispatch({
               type: "LOGOUT"

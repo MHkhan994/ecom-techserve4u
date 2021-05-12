@@ -41,7 +41,7 @@ const WithAuth = (AuthComponent) => {
      
       
         this.setState({ isLoading: true });
-      const token = Cookies.get("ecom")
+      const token = Cookies.get("myshop_auth2")
      
       
       if(!token){

@@ -25,7 +25,7 @@ function GoogleAuth({from}) {
         }
         axios.patch("/user/setpassandcreate", data)
             .then(res => {
-                Cookies.set("ecom", res.data.token);
+                Cookies.set("myshop_auth2", res.data.token);
                 notificationFunc("success", "Registered successfully")
                 handleCancel()
                 setTimeout(() => {
@@ -44,7 +44,7 @@ function GoogleAuth({from}) {
                     setIsModalVisible(true)
                     setTokenId(res.data.tokenId)
                 } else {
-                    Cookies.set("ecom", res.data.token);
+                    Cookies.set("myshop_auth2", res.data.token);
                     notificationFunc("success", "Logged in successfully")
                     setTimeout(() => {
                         window.location.pathname = '/'

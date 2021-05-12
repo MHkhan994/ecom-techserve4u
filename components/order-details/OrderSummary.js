@@ -51,11 +51,15 @@ function OrderSummary({order}) {
                             </tr>
                             <tr>
                                 <td> Shipping Region:</td>
-                                <td>{order && order.addressId.region}</td>
+                                <td>{order && order.addressId.state}</td>
                             </tr>
                             <tr>
                                 <td> Shipping Area:</td>
-                                <td>{order && order.addressId.area}</td>
+                                <td>{order && order.addressId.city}</td>
+                            </tr>
+                            <tr>
+                                <td> Zip Code:</td>
+                                <td>{order && order.addressId.zip}</td>
                             </tr>
                             <tr>
                                 <td> Shipping Address:</td>
