@@ -359,13 +359,16 @@
             border: 1px solid $border_light;
             box-shadow: $box_shadow;
             cursor: pointer;
+            @media (max-width:412px) {
+                flex-basis: 100%;
+            }
         }
         .add_icon{
             font-size: 25px;
             font-weight: 500;
         }
         .address-megabox{
-
+            
             flex-basis: 47%;
             cursor: pointer;
             margin-bottom: 10px;
@@ -374,11 +377,15 @@
             display: flex !important;
             align-items: center;
             padding: 10px;
+            
             &.active{
                 border: 1px solid $primary_color;
             }
             .alpha-6 {
                 opacity: .6;
+            }
+            @media (max-width:412px) {
+                flex-basis: 100%;
             }
 
             

@@ -12,6 +12,8 @@ import { Badge } from 'antd';
 import Link from 'next/link'
 import MobileHeader from './MobileHeader.js'
 import Search from './Search.js'
+import NotificationComp from './NotificationComp'
+import { getNotifications } from '../../actions/generalActions'
 
 
 export default function Header() {
@@ -30,7 +32,11 @@ export default function Header() {
  
 
    
-
+    useEffect(() => {
+        if (isAuthenticated) {
+            dispatch(getNotifications());
+        }
+    }, [Router.pathname, isAuthenticated])
 
 
 
@@ -119,7 +125,9 @@ export default function Header() {
                                     </Badge>
 
                                 </span>
-                                <span><i className="far fa-bell"></i></span>
+                                {
+                                    isAuthenticated &&  <NotificationComp />
+                                }
                                 <span onClick={handleClickUser}><i className="far fa-user"></i></span>
                             </div>
                         </div>

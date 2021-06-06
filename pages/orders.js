@@ -75,7 +75,7 @@ function orders() {
         <>
             <Header />
             <div id="orderdetails">
-                <div className="main_container">
+                <div  className="main_container">
                     <div className="row">
                         <div className="col-lg-4 col-md-12">
                             <OrderLists />
@@ -136,7 +136,7 @@ function orders() {
                                     </div>
                                 </div>
 
-                                <div className="steps">
+                                <div className="steps" style={{paddingBottom:"30px"}}>
                                     {/* <Steps current={2}  direction="vertical">
           <AntStep title="Step 1" description="This is a description." />
           <AntStep title="Step 2" description="This is a description." />

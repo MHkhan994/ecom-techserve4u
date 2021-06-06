@@ -62,7 +62,7 @@ function CartDeatils({onStepChange}) {
                         </div>
                         <div className="product_price">
                             <span className='price'>${cartItems[key].price} </span>
-                            <button onClick={() => dispatch(removeCartItem(cartItems[key]._id))} className="remove">
+                            <button onClick={() => dispatch(removeCartItem(cartItems[key].productId))} className="remove">
                                 Remove
                             </button>
                         </div>

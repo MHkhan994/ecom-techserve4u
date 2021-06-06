@@ -6,9 +6,8 @@ import { notificationFunc } from '../global/notification'
 import {useRouter} from 'next/router'
 
 
-function Paypal({ shippingCost,addressId }) {
+function Paypal({ shippingCost,addressId,paymentMethods }) {
   const { open, cartItems } = useSelector(state => state.cart)
-  const {paymentMethods} = useSelector(state => state.general)
   const Router = useRouter()
   const dispatch = useDispatch()
 

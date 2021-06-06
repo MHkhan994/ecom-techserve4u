@@ -106,7 +106,7 @@ export default function CartDrawer({ cartState, onCloseCart }) {
                                        
                                     </div>
                                     <div className="action_button">
-                                        <i onClick={() => dispatch(removeCartItem(cartItems[key]._id))} className="far fa-trash-alt"></i>
+                                        <i onClick={() => dispatch(removeCartItem(cartItems[key].productId))} className="far fa-trash-alt"></i>
                                     </div>
                                 </div>
                             ))}

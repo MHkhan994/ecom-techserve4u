@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import ReactHtmlParser from 'react-html-parser'
-import Reviews from './Reviewss';
+import Reviews from './Reviews';
 
 function ProductTab({description, tags,productId}) {
    

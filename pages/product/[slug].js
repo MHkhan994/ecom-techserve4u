@@ -7,7 +7,7 @@ import { Empty } from 'antd';
 import { NextSeo } from 'next-seo';
 import ProductInfo from '../../components/product-details/productDetails';
 import SideInfo from '../../components/product-details/SideInfo';
-import RelatedProducts from '../../components/product-details/RElatedProducts';
+import RelatedProducts from '../../components/product-details/RelatedProducts';
 
 
 

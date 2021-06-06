@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import Search from './Search'
 import Link from 'next/link'
+import {useSelector} from 'react-redux'
+import NotificationComp from './NotificationComp'
 
 function MobileHeader({ setUserDrawerOpen }) {
     const [isSearch, setIsSearch] = useState(false)
+    const { user, isAuthenticated } = useSelector(state => state.auth)
     return (
         <div className="mobile_nav_container">
             <div className="nav_content">
@@ -14,11 +17,14 @@ function MobileHeader({ setUserDrawerOpen }) {
 
                     <Link href='/'>
                         <a>
-                        <img src='/logo.png'></img>
+                            <img src='/logo.png'></img>
                         </a>
                     </Link>
                 </div>
                 <div className="search_logo">
+                    {
+                        isAuthenticated && <NotificationComp />
+                    }
                     <i onClick={() => setIsSearch(!isSearch)} className="fas fa-search"></i>
                 </div>
             </div>

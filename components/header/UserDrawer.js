@@ -19,19 +19,9 @@ const useStyles = makeStyles({
 
 export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUserDrawer, categories }) {
 
-    const { open } = useSelector(state => state.cart)
     const { user, isAuthenticated } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const classes = useStyles();
-    const [state, setState] = useState(true);
 
-
-
-    const handleCloseCart = () => {
-        dispatch({
-            type: "CART_CLOSE"
-        })
-    }
 
 
     const handleLogout = () => {
@@ -39,14 +29,16 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
         window.location.pathname = '/'
     }
 
-
-
     return (
         <div>
             <Drawer anchor={"left"} open={userDrawerState} onClose={onCloseUserDrawer()}>
                 <div className="user_drawer_header">
                     <div className="avatar">
-                        <img src={user.profilePicture||"https://via.placeholder.com/80"} alt="" />
+                        {
+                            isAuthenticated ?
+                            <img src={user.profilePicture || "https://via.placeholder.com/80"} alt="" />:
+                            <img src={"https://via.placeholder.com/80"} alt="" />
+                        }
                         <div className='name_mobile'>
                             <p>{user.name}</p>
                             <span>{user.mobile}</span>
@@ -107,12 +99,18 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
                                 </a>
                             </Link>
                         </li>
-                        <li className="list_item">
-                            <a className="list_item_link" href="#">
-                                <span><i className="fas fa-truck-moving"></i></span>
-                                <p>Track Order</p>
-                            </a>
-                        </li>
+                        {
+                            isAuthenticated &&
+                            <li className="list_item">
+                                <Link href="/orders">
+                                    <a className="list_item_link" href="#">
+                                        <span><i className="fas fa-truck-moving"></i></span>
+                                        <p>Track Order</p>
+                                    </a>
+                                </Link>
+
+                            </li>
+                        }
                         <li className="list_item">
                             <a className="list_item_link" href="#">
                                 <span><i className="far fa-comments"></i></span>

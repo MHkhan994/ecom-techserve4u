@@ -3,7 +3,7 @@ let init ={
     addresses:[],
     categories:[],
     brands:[],
-
+    notifications: []
 }
 
 const generalData = (state=init, action)=>{
@@ -28,7 +28,19 @@ const generalData = (state=init, action)=>{
            ...state,
            brands:action.payload
         }
-      
+        case "SET_NOTIFICATIONS":
+            return {
+                ...state,
+                notifications: action.payload,
+            }
+        case "UPDATE_NOTIFICATION":
+            let array = [...state.notifications]
+            let index = array.findIndex(n => n._id === action.payload._id)
+            array[index] = action.payload
+            return {
+                ...state,
+                notifications: array,
+            }
         default:
             return state;
     }

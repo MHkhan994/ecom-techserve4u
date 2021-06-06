@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { SpinnerCircularFixed } from 'spinners-react';
+import {fetchCategories,fetchBrands,fetchAddresses} from '../actions/generalActions'
 
 //import {setToast} from './ToastMsg'
 import store from "../store";
@@ -18,46 +19,9 @@ const configureAxiosHeader = () => {
 
 };
 
-const fetchCategories = () => {
-  axios.get(process.env.NEXT_PUBLIC_API_URL + '/category/getcategory')
-    .then(res => {
-      store.dispatch({
-        type: "SET_CATEGORIES",
-        payload: res.data.categories
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-}
 
-const fetchBrands = () => {
-  axios.get('/brand/get')
-    .then(res => {
-      
-      store.dispatch({
-        type: "SET_BRANDS",
-        payload: res.data.brands
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-}
 
-const fetchAddresses=()=>{
-  axios
-  .get("/address/getaddress")
-  .then((res) => {
-      store.dispatch({
-        type: "SET_ADDRESSES",
-        payload: res.data.addresses
-      })
-  })
-  .catch((err) => {
-      console.log(err);
-  });
-}
+
 
 
 const AuthAndAxiso = (AuthComponent) => {
@@ -92,8 +56,8 @@ const AuthAndAxiso = (AuthComponent) => {
     componentDidMount() {
 
       configureAxiosHeader();
-      fetchCategories()
-      fetchBrands()
+      store.dispatch(fetchCategories())
+      store.dispatch(fetchBrands())
       
 
       const token = Cookies.get("myshop_auth2")
@@ -106,7 +70,7 @@ const AuthAndAxiso = (AuthComponent) => {
           .then((res) => {
             if (res.status === 200 && res.data.success) {
               //do some change state
-              fetchAddresses()
+              store.dispatch(fetchAddresses())
               this.setState({ userData: res.data.user });
               this.setState({ isLoading: false });
               store.dispatch({

@@ -25,7 +25,7 @@ function Reviews({ productId }) {
         }
     }, [productId])
 
-    const Review = ({ children ,review}) => (
+    const Review = ({ children, review }) => (
         <Comment
             author={<div className='review_list'>
                 <Rating size="small" precision={0.5} readOnly defaultValue={0} value={review.rating} />
@@ -33,14 +33,14 @@ function Reviews({ productId }) {
             </div>}
             avatar={
                 <Avatar
-                    src={review.user?.profilePicture? review.user.profilePicture:"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
-                    alt="Han Solo"
+                    src={review.user?.profilePicture ? review.user.profilePicture : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+                    alt={review.user?.name}
                 />
             }
             content={
                 <p>
                     {review.comment}
-            </p>
+                </p>
             }
         >
             {children}
@@ -48,12 +48,32 @@ function Reviews({ productId }) {
     );
 
 
+    const Reply = ({reply}) => (
+
+        <Comment
+            author={<span>{reply?.name}</span>}
+            avatar={
+                <Avatar
+                    src={reply?.profile ? reply.profile : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
+                    alt={reply?.name}
+                />
+            }
+            content={
+                <p>
+                    {reply.comment}
+                </p>
+            }
+        />
+
+    )
+
+
     return (
         <div id='review'>
             <div className="review_info">
                 <div className="counts">
                     <div className="average_count">
-                        <span>{average == 'NaN' ?0:average}<span className='maximum'>/5</span></span>
+                        <span>{average == 'NaN' ? 0 : average}<span className='maximum'>/5</span></span>
                     </div>
                     <div className="rating">
                         <Rating size="large" precision={0.5} readOnly defaultValue={0} value={average} />
@@ -144,10 +164,12 @@ function Reviews({ productId }) {
                         reviews.map((review, index) => {
                             return (
                                 <Review key={index} review={review} >
-
+                                    {
+                                        review.reply && review.reply.comment && <Reply reply={review.reply} />
+                                    }
                                 </Review>
                             )
-                        }):
+                        }) :
                         <p>No reviews found</p>
                 }
 

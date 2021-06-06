@@ -70,7 +70,6 @@ export const addToCart = (product, newQty) => {
             productId: cartItems[key].productId
         }))
 
-        console.log(items);
 
         axios.post( process.env.NEXT_PUBLIC_API_URL+"/order/checkcartproducts",{items})
         .then(async res=>{
@@ -117,11 +116,10 @@ export const addToCart = (product, newQty) => {
         : null;
 
         let newCart={}
-
         Object.keys(cartItems).map((key, index)=>{
           //console.log(cartItems[key]._id === payload);
-          if(cartItems[key]._id === payload)return
-          newCart[cartItems[key]._id] = cartItems[key]
+          if(cartItems[key].productId === payload)return
+          newCart[cartItems[key].productId] = cartItems[key]
          // console.log( newCart);
         })
 

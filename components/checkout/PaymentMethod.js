@@ -46,7 +46,7 @@ function PaymentMethod({ onStepChange,onChangeMethod,selectedPaymentMethod,handl
       <div className='d-flex justify-content-between my-3 mt-5'>
         <button onClick={() => onStepChange(-1)} className='primary_outline_btn'>Back</button>
         {
-          selectedPaymentMethod === 'paypal' ?<Paypal shippingCost={shippingCost} addressId={addressId} /> :
+          selectedPaymentMethod === 'paypal' ?<Paypal paymentMethods={paymentMethods} shippingCost={shippingCost} addressId={addressId} /> :
           <button disabled={isLoading} onClick={() =>  handleConfirmOrder()} className='primary_btn'>Confirm Order</button>
         }
         
