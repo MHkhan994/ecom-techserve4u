@@ -416,9 +416,17 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 10px;
-      .mobile_logo img{
+      .mobile_logo{
+        font-size: 25px;
+        font-weight: bold;
+        a {
+          text-decoration: none;
+          color: $dark_gray;
+      }
+      img{
         height: 40px;
       }
+    }
       .fas,.far {
         font-size: 20px;
         color: $light_gray_2;

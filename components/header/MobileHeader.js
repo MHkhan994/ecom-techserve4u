@@ -17,7 +17,8 @@ function MobileHeader({ setUserDrawerOpen }) {
 
                     <Link href='/'>
                         <a>
-                            <img src='/logo.png'></img>
+                            {/* <img src='/logo.png'></img> */}
+                            Protocol Inc
                         </a>
                     </Link>
                 </div>
