@@ -16,7 +16,8 @@
             img {
                 height: 100%;
                 width: 100%;
-                object-fit: contain;
+                height: 300px;
+                object-fit: cover;
             }
 
             h6 {
