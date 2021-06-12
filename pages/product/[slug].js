@@ -53,9 +53,9 @@ function ProductDeatils({ product, campDiscount }) {
                     product && <NextSeo
                         title={product.meta?.title || product.name}
                         description={product.meta.description || product.description}
-                        canonical="https://dcel.xyz/"
+                        canonical="https://test-ecom.techserve4u.com/"
                         openGraph={{
-                            url: 'https://dcel.xyz/',
+                            url: 'https://test-ecom.techserve4u.com/',
                             title: product.name,
                             description: 'This is react js ecommerce website',
                             images: [
@@ -66,7 +66,7 @@ function ProductDeatils({ product, campDiscount }) {
                                     alt: 'Og Image Alt',
                                 },
                             ],
-                            site_name: 'Dcel',
+                            site_name: 'Techserve4u',
                         }}
                         twitter={{
                             handle: '@handle',

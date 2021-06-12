@@ -82,9 +82,9 @@ export default function Home() {
         <NextSeo
           title="Ecommerce Website"
           description="This is react js ecommerce website"
-          canonical="https://dcel.xyz/"
+          canonical="https://test-ecom.techserve4u.com/"
           openGraph={{
-            url: 'https://dcel.xyz/',
+            url: 'https://test-ecom.techserve4u.com/',
             title: 'Ecommerce Website',
             description: 'This is react js ecommerce website',
             images: [
@@ -95,7 +95,7 @@ export default function Home() {
                 alt: 'Og Image Alt',
               },
             ],
-            site_name: 'Dcel',
+            site_name: 'Techserve4u',
           }}
           twitter={{
             handle: '@handle',
