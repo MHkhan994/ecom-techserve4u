@@ -1,21 +1,24 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Form, Input, Alert } from 'antd';
-import { PhoneOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Alert, Spin } from 'antd';
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import Cookies from "js-cookie";
-import {notificationFunc} from '../global/notification'
+import { notificationFunc } from '../global/notification'
 import Link from 'next/link'
 import GoogleAuth from '../auth/GoogleAuth';
 
 
 const LoginForm = () => {
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
   const onFinish = (values) => {
+    setLoading(true)
     axios.post('/user/signin', values)
       .then(res => {
         if (res.status === 200) {
           Cookies.set("myshop_auth2", res.data.token);
           notificationFunc("success", "login success")
+          setLoading(false)
           setTimeout(() => {
             window.location.pathname = '/'
           }, 1000);
@@ -24,7 +27,7 @@ const LoginForm = () => {
       })
       .catch(err => {
         setError(err && err.response && err.response.data);
-        console.log(err && err.response && err.response.data);
+        setLoading(false)
       })
 
   };
@@ -59,11 +62,11 @@ const LoginForm = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="mobile"
-          validateStatus={error && error.mobile ? "error" : "succcess"}
-          help={error && error.mobile ? error.mobile : null}
+          name="email"
+          validateStatus={error && error.email ? "error" : "succcess"}
+          help={error && error.email ? error.email : null}
         >
-          <Input prefix={<PhoneOutlined className="site-form-item-icon" />} placeholder="01*********" />
+          <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Enter your email" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -79,10 +82,13 @@ const LoginForm = () => {
 
 
         <div className='g_auth'>
-          <button type="primary" htmlType="submit" className="primary_btn mb-2">
+          <button type="primary" disabled={loading} htmlType="submit" className="primary_btn mb-2">
             Log in
-        </button>
-        <div className='g_auth'>
+            {
+              loading && <Spin size='small' style={{ marginLeft: "10px" }} />
+            }
+          </button>
+          <div className='g_auth'>
             <GoogleAuth />
           </div>
           <span className='register'> Dont't have an account ? <Link href="/auth/register"><a>register now!</a></Link></span>

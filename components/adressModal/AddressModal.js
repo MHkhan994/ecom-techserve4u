@@ -125,14 +125,35 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
                     >
                         <Input />
                     </Form.Item>
+
                     <Form.Item
-                        name="mobileNumber"
-                        label="Mobile number"
-                        validateStatus={error && error.mobileNumber ? "error" : "succcess"}
-                        help={error && error.mobileNumber ? error.mobileNumber : null}
+                        name="address"
+                        label="Address"
+                        validateStatus={error && error.address ? "error" : "succcess"}
+                        help={error && error.address ? error.address : null}
+                       
+                    >
+                        <Input.TextArea  placeholder="Street address,apt,suite,building,floor,etc." />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="zip"
+                        label="Zip Code"
+                        validateStatus={error && error.zip ? "error" : "succcess"}
+                        help={error && error.zip ? error.zip : null}
                     >
                         <Input />
                     </Form.Item>
+
+                    <Form.Item
+                        name="city"
+                        label="City"
+                        validateStatus={error && error.city ? "error" : "succcess"}
+                        help={error && error.city ? error.city : null}
+                    >
+                        <Input />
+                    </Form.Item>
+
                     <Form.Item
                         name="state"
                         label="State"
@@ -160,31 +181,19 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
 
                         </Select>
                     </Form.Item>
+
                     <Form.Item
-                        name="city"
-                        label="City"
-                        validateStatus={error && error.city ? "error" : "succcess"}
-                        help={error && error.city ? error.city : null}
+                        name="mobileNumber"
+                        label="Mobile number"
+                        validateStatus={error && error.mobileNumber ? "error" : "succcess"}
+                        help={error && error.mobileNumber ? error.mobileNumber : null}
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item
-                        name="zip"
-                        label="Zip Code"
-                        validateStatus={error && error.zip ? "error" : "succcess"}
-                        help={error && error.zip ? error.zip : null}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="address"
-                        label="Address"
-                        validateStatus={error && error.address ? "error" : "succcess"}
-                        help={error && error.address ? error.address : null}
-                       
-                    >
-                        <Input.TextArea  placeholder="Street address,apt,suite,building,floor,etc." />
-                    </Form.Item>
+                    
+                    
+                    
+                    
                 </Form>
             </Modal>
         </>
