@@ -14,7 +14,7 @@ import OrderLists from '../components/order-details/OrderLists.js';
 import { useRouter } from 'next/router'
 import OrderSummary from '../components/order-details/OrderSummary.js';
 import OrderDetails from '../components/order-details/OrderDetails.js';
-
+import InvoiceGenerator from '../components/order-details/InvoiceGenerator'
 
 function getSteps() {
     return ['Pending', 'Processing', "Shipped", "delivered"];
@@ -75,7 +75,7 @@ function orders() {
         <>
             <Header />
             <div id="orderdetails">
-                <div  className="main_container">
+                <div className="main_container">
                     <div className="row">
                         <div className="col-lg-4 col-md-12">
                             <OrderLists />
@@ -83,9 +83,15 @@ function orders() {
                         <div className="col-lg-8 col-md-12">
                             <div className="details">
                                 <div className="header_info py-4">
-                                    <div>
-                                        <h5>Invoice: {order && order.invoice}</h5>
-                                        <span >{moment(order && order.createdAt).format("DD MMM YYYY, hh:mm A")}</span>
+                                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%"}}>
+                                        <div>
+                                            <h5>Invoice: {order && order.invoice}</h5>
+                                            <span >{moment(order && order.createdAt).format("DD MMM YYYY, hh:mm A")}</span>
+                                        </div>
+
+                                        {
+                                            order && <InvoiceGenerator order={order} />
+                                        }
                                     </div>
                                     {
                                         order && order.paymentStatus === 'paid' ?
@@ -96,10 +102,10 @@ function orders() {
                                                 okText="Yes"
                                                 cancelText="No"
                                             >
-                                                <Button type="danger">Request Refund</Button>
-                                            </Popconfirm> : 
-                                           order && order.paymentStatus === 'refundRequested' ? <Button type="danger">Refund Requested</Button>:
-                                           order && order.paymentStatus === 'refunded' && <Button type="danger">Refunded</Button>
+                                                <Button style={{marginLeft:"10px"}} type="danger">Request Refund</Button>
+                                            </Popconfirm> :
+                                            order && order.paymentStatus === 'refundRequested' ? <Button style={{marginLeft:"10px"}} type="danger">Refund Requested</Button> :
+                                                order && order.paymentStatus === 'refunded' && <Button style={{marginLeft:"10px"}} type="danger">Refunded</Button>
                                     }
 
 
@@ -136,7 +142,7 @@ function orders() {
                                     </div>
                                 </div>
 
-                                <div className="steps" style={{paddingBottom:"30px"}}>
+                                <div className="steps" style={{ paddingBottom: "30px" }}>
                                     {/* <Steps current={2}  direction="vertical">
           <AntStep title="Step 1" description="This is a description." />
           <AntStep title="Step 2" description="This is a description." />
