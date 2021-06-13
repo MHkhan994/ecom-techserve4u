@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Alert } from 'antd';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox,Spin } from 'antd';
 import Header from '../../components/header/Header';
 import Cookies from "js-cookie";
 import Link from 'next/link'
@@ -19,12 +19,15 @@ const layout = {
 
 const Login = () => {
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
   const onFinish = (values) => {
+    setLoading(true)
     axios.post('/user/signin', values)
       .then(res => {
         if (res.status === 200) {
           Cookies.set("myshop_auth2", res.data.token);
           notificationFunc("success", "login success")
+          setLoading(false)
           setTimeout(() => {
             window.location.pathname = '/'
           }, 1000);
@@ -33,7 +36,7 @@ const Login = () => {
       })
       .catch(err => {
         setError(err && err.response && err.response.data);
-        console.log(err && err.response && err.response.data);
+        setLoading(false)
       })
 
   };
@@ -93,8 +96,12 @@ const Login = () => {
 
 
           <div className='g_auth'>
-            <button className="primary_btn my-3" type="primary" htmlType="submit">
+            <button  className="primary_btn my-3" disabled={loading} type="primary" htmlType="submit">
               Login
+              {
+                loading && <Spin size='small' style={{marginLeft:"10px"}} />
+              }
+             
         </button>
         <div className='g_auth'>
             <GoogleAuth />

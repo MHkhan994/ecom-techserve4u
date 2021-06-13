@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert } from 'antd';
+import { Alert,Spin } from 'antd';
 import axios from 'axios'
 import { Form, Input, Button, Checkbox, notification } from 'antd';
 import Header from '../../components/header/Header';
@@ -23,7 +23,7 @@ const layout = {
 
 const Register = () => {
 
-
+    const [loading, setLoading] = useState(false)
     const [newCodeTimer, setNewCodeTimer] = useState(Date.now() + 59000)
     const [mount, setMount] = useState(true)
     const [email, setEmail] = useState('')
@@ -36,7 +36,7 @@ const Register = () => {
 
 
     const onFinish = (values) => {
-        console.log(values);
+        setLoading(true)
         axios.post('/user/signup', values)
             .then(res => {
 
@@ -45,6 +45,7 @@ const Register = () => {
                     setIsOtpSend(true)
                     setEmail(res.data.email)
                     setMount(false)
+                    setLoading(false)
                     setTimeout(() => {
                         setMount(true)
                     }, 100);
@@ -55,6 +56,7 @@ const Register = () => {
             })
             .catch(err => {
                 setError(err && err.response && err.response.data);
+                setLoading(false)
                 // console.log(err && err.response && err.response.data);
             })
 
@@ -116,9 +118,13 @@ const Register = () => {
 
 
                 <div className='g_auth' >
-                    <button className="primary_btn my-3" type="primary" htmlType="submit">
+                    <button className="primary_btn my-3" disabled={loading} type="primary" htmlType="submit">
                         Register
-                        </button>
+                        {
+                            loading && <Spin size='small' style={{ marginLeft: "10px" }} />
+                        }
+
+                    </button>
                     <div className='g_auth'>
                         <GoogleAuth />
                     </div>
