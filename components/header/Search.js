@@ -9,31 +9,50 @@ function Search() {
     const [searchedProducts, setSearchedProducts] = useState([])
 
     useEffect(() => {
-        if (query === '') {
-            return setSearchedProducts([])
-        }
+        
         const delayed = setTimeout(() => {
+            if (query === '') {
+                return setSearchedProducts([])
+            }
             axios.get(`/product/getsearchproducts?search=${query}`)
                 .then(res => {
                     setSearchedProducts(res.data.products);
-                    console.log(res.data.products);
+                   
                 })
+                .catch(err=>{
+                    setSearchedProducts([])
+                })
+                
         }, 100)
-        return () => clearTimeout(delayed)
+        return () => {
+            clearTimeout(delayed)
+        }
     }, [query])
+
+    useEffect(() => {
+       if(query === '' && searchedProducts.length>0){
+           setSearchedProducts([])
+       }
+    }, [query,searchedProducts])
 
     let handleKey = (e) => {
 
         if (e.keyCode === 13) {
             e.preventDefault()
+            setSearchedProducts([])
             Router.push(`/search?query=${query}`)
         }
     }
+    const handlePush=()=>{
+        setSearchedProducts([])
+        Router.push(`/search?query=${query}`)
+    }
+
 
     return (
         <div className="search_wrapper">
             <input onKeyDown={(e) => handleKey(e)} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="search for..."></input>
-            <i onClick={() => Router.push(`/search?query=${query}`)} className="fas fa-search"></i>
+            <i onClick={() => handlePush()} className="fas fa-search"></i>
             <div className={`search_overlay ${searchedProducts.length == 0 && "d-none"}`}>
                 <div className="search_products">
                     {
