@@ -3,6 +3,7 @@ import Search from './Search'
 import Link from 'next/link'
 import {useSelector} from 'react-redux'
 import NotificationComp from './NotificationComp'
+import { motion, AnimatePresence } from "framer-motion"
 
 function MobileHeader({ setUserDrawerOpen }) {
     const [isSearch, setIsSearch] = useState(false)
@@ -29,12 +30,26 @@ function MobileHeader({ setUserDrawerOpen }) {
                     <i onClick={() => setIsSearch(!isSearch)} className="fas fa-search"></i>
                 </div>
             </div>
-            {
+            
+            <AnimatePresence>
+                {isSearch && (
+                    <motion.div
+                        initial={{ opacity: 0 ,height:0}}
+                        animate={{ opacity: 1 ,height:0}}
+                        exit={{ opacity: 0 ,height:0}}
+                        transition={{duration:0.5}}
+                    >
+                        <Search />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* {
                 isSearch &&
                 <div style={{ marginBottom: "10px" }}>
                     <Search />
                 </div>
-            }
+            } */}
         </div>
     )
 }

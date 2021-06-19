@@ -8,6 +8,7 @@ import { NextSeo } from 'next-seo';
 import ProductInfo from '../../components/product-details/productDetails';
 import SideInfo from '../../components/product-details/SideInfo';
 import RelatedProducts from '../../components/product-details/RelatedProducts';
+import LatestProducts from '../../components/Home/LatestProducts'
 
 
 
@@ -89,11 +90,11 @@ function ProductDeatils({ product, campDiscount }) {
                         <div className="col-md-3 col-sm-12 right_side">
                             <SideInfo />
                         </div>
-                        <div className="row  p-0">
-                            <div className="col-12 my-5">
-                                <RelatedProducts title="Related products" array={relatedProducts} />
-                            </div>
-                        </div>
+                        <section className="my-2">
+                         
+                                <LatestProducts hidetitle={true} title="Related products" array={relatedProducts} />
+    
+                        </section>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import Header from '../components/header/Header.js'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import ProductCard from '../components/productCard/index.js'
 import { SpinnerCircularFixed } from 'spinners-react';
-import { Menu, Checkbox, Pagination, Select } from 'antd';
+import { Menu, Checkbox, Pagination, Select ,Input} from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import Drawer from '@material-ui/core/Drawer';
 const { SubMenu } = Menu;
@@ -67,23 +67,6 @@ function search() {
             })
     }
 
-    const fetchCategories = () => {
-        setCategoriesFiltered([])
-        setCategoriesToShow([])
-        axios.get('/category/getcategory')
-            .then(res => {
-                setCategories(res.data.categories);
-                setFlatCategories(res.data.flatCategories)
-                //console.log(res.data.categories);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    useEffect(() => {
-        //fetchCategories()
-    }, [])
 
 
 
@@ -97,15 +80,10 @@ function search() {
 
 
 
-
-    const handlePrice = (e) => {
-        setPriceRange({ ...priceRange, [e.target.name]: e.target.value })
-    }
-
-
     const syncUrl = (checked, val, type) => {
         // console.log(checked,key,type);
         let query = Router.query
+        delete query["page"]
         //console.log(Object.keys(query).includes(type));
 
         if (Object.keys(Router.query).includes(type)) {
@@ -162,7 +140,10 @@ function search() {
         setOpen(false)
     }
 
+const [min, setMin] = useState(0)
 
+const maxRef = useRef(null)
+const minRef = useRef(null)
 
 
     const FilterList = () => {
@@ -174,15 +155,18 @@ function search() {
                     </div>
                     <div className="filtercontent">
                         <div className="filterprice">
-                            <form onChange={(e) => handlePrice(e)} className="d-flex align-items-center justify-content-between">
-                                <input value={priceRange.min > 0 && priceRange.min} name='min' type="number" step="1" placeholder="Min price" className="priceinput" />
+                            <div  className="d-flex align-items-center justify-content-between">
+                                <Input ref={minRef}  name='min' type="number" step="1" placeholder="Min price" className="priceinput" />
                                 <span className="mx-2"> to </span>
-                                <input value={priceRange.max > 0 && priceRange.max} name='max' type="number" step="1" placeholder="Max price" className="priceinput" />
+                                <Input ref={maxRef} name='max' type="number" step="1" placeholder="Max price" className="priceinput" />
                                 <button onClick={(e) => {
                                     e.preventDefault()
-                                    Router.push(`/search?max=${priceRange.max}&min=${priceRange.min}`)
+                                    {
+                                        maxRef.current.state.value && minRef.current.state.value &&  Router.push(`/search?max=${maxRef.current.state.value||0}&min=${minRef.current.state.value||0}`)
+                                    }
+                                   
                                 }} className="primary_btn">GO</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

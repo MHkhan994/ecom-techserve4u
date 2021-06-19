@@ -14,7 +14,7 @@ function Search() {
             if (query === '') {
                 return setSearchedProducts([])
             }
-            axios.get(`/product/getsearchproducts?search=${query}`)
+            axios.get(`/product/getsearchproducts?search=${query.trim()}`)
                 .then(res => {
                     setSearchedProducts(res.data.products);
                    
@@ -40,12 +40,12 @@ function Search() {
         if (e.keyCode === 13) {
             e.preventDefault()
             setSearchedProducts([])
-            Router.push(`/search?query=${query}`)
+            Router.push(`/search?query=${query.trim()}`)
         }
     }
     const handlePush=()=>{
         setSearchedProducts([])
-        Router.push(`/search?query=${query}`)
+        Router.push(`/search?query=${query.trim()}`)
     }
 
 
@@ -76,7 +76,7 @@ function Search() {
                                                             }
 
                                                         </> :
-                                                        <span className="new-price">$119</span>
+                                                        <span className="new-price">${product.price}</span>
                                                 }
 
 
