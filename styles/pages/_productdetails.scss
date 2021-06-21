@@ -171,7 +171,9 @@
             display: flex;
             .add_to_cart {
                 padding: 10px 0;
-                width: 225px;
+                max-width: 225px;
+                min-width: 150px;
+                width: 100%;
                 text-align: center;
                 margin-right: 10px;
                 border: 1px solid  $primary_color;
@@ -186,12 +188,21 @@
             }
             .add_to_wish{
                 padding: 10px 0;
-                width: 225px;
+                max-width: 225px;
+                min-width: 150px;
+                width: 100%;
                 text-align: center;
                 margin-right: 10px;
                 border: 1px solid #2abbe8;
                 background: #2abbe8;
                 color: #fff;
+            }
+            @media (max-width:350px) {
+                .add_to_cart,.add_to_wish{
+                    padding: 5px;
+                    min-width: 50%;
+                    font-size: 15px;
+                }
             }
             margin-top: 10px;
 

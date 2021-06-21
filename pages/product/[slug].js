@@ -78,7 +78,7 @@ function ProductDeatils({ product, campDiscount }) {
                 }
 
                 <div className="main_container">
-                    <div className="row mt-3">
+                    <div className="row mt-2">
 
                         {
                             product ? <ProductInfo product={product} campDiscount={campDiscount} /> :

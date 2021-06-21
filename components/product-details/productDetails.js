@@ -463,7 +463,7 @@ function ProductInfo({ product, campDiscount }) {
                 </div>
 
                 <div className="row">
-                    <div className="col-12 my-5">
+                    <div className="col-12 my-2">
                         <ProductTab productId={product._id} description={product.description} tags={product.tags} />
                     </div>
 

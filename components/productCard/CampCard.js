@@ -52,15 +52,15 @@ function CampCard({ product ,_id}) {
                             {
                                 discount?.value > 0 ?
                                     <>
-                                        <span className="old-price">৳{product.price}</span>
+                                        <span className="old-price">${product.price}</span>
                                         {
                                             discount.discountType === 'flat' ?
-                                            <span className="new-price">৳{product.price-discount.value}</span>:
-                                            <span className="new-price">৳{product.price-Math.floor((product.price*(discount.value/100)))}</span>
+                                            <span className="new-price">${product.price-discount.value}</span>:
+                                            <span className="new-price">${product.price-Math.floor((product.price*(discount.value/100)))}</span>
                                         }
                                         
                                     </>:
-                                    <span className="new-price">৳{product.price}</span>
+                                    <span className="new-price">${product.price}</span>
                             }
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Rating from '@material-ui/lab/Rating';
+import Image from 'next/image'
 
 function ProductCard({ product }) {
     //console.log(product);
@@ -13,17 +14,20 @@ function ProductCard({ product }) {
                         - {product.discount.discountType === 'percent' ? product.discount.value :
                             Math.floor((product.discount.value / product.price) * 100)
                         }%
-              </span>
+                    </span>
                 }
 
                 <Link href={`/product/${product?.slug ? product.slug : "sample"}`}>
                     <a>
-                        <img
+                        <Image
+                            width={500}
+                            height={500}
                             src={
                                 product?.thumbnail
                                     ? product.thumbnail
                                     : "https://via.placeholder.com/250"
                             }
+
                             alt=""
                         />
                     </a>
@@ -33,8 +37,8 @@ function ProductCard({ product }) {
                 <a>
                     <div className="product_info">
                         <div className="rating">
-                        <Rating size="small" precision={0.5} readOnly  defaultValue={0} value={product.average} />
-                        <span className='count'>({product.ratingCount||0})</span>
+                            <Rating size="small" precision={0.5} readOnly defaultValue={0} value={product.average} />
+                            <span className='count'>({product.ratingCount || 0})</span>
                         </div>
                         <h5>{product?.name ? product.name : "Product name"}</h5>
 
@@ -45,11 +49,11 @@ function ProductCard({ product }) {
                                         <span className="old-price">${product.price}</span>
                                         {
                                             product.discount.discountType === 'flat' ?
-                                            <span className="new-price">${product.price-product.discount.value}</span>:
-                                            <span className="new-price">${product.price-Math.floor((product.price*(product.discount.value/100)))}</span>
+                                                <span className="new-price">${product.price - product.discount.value}</span> :
+                                                <span className="new-price">${product.price - Math.floor((product.price * (product.discount.value / 100)))}</span>
                                         }
-                                        
-                                    </>:
+
+                                    </> :
                                     <span className="new-price">${product.price}</span>
                             }
 
