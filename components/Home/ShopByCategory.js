@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function ShopByCategory({ title, data }) {
     return (
-        <div className="shop_by">
+        <div className="shop_by_cat">
             <div className="section_heading">
                 <h5>{title}</h5>
                 <Link href="/categories">
