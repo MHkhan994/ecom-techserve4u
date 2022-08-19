@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Next.js CI
+name: Next.js CI staging
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64, staging]
 
     strategy:
       matrix:
@@ -26,5 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm i
+    - run: mv .env.staging .env
     - run: npm run build
-    - run: pm2 restart ecom-front
+    - run: pm2 delete ecom-staging-front 2> /dev/null || true 
+    - run: pm2 start 'npx next start -p 4001' --name ecom-staging-front

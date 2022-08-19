@@ -47,10 +47,6 @@ function ProductInfo({ product, campDiscount }) {
 
 
 
-
-
-
-
     const setProductForCart = (prod) => {
         let item = {
             productId: prod._id,

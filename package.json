@@ -23,6 +23,7 @@
     "next-redux-wrapper": "^6.0.2",
     "next-seo": "^4.24.0",
     "nprogress": "^0.2.0",
+    "password-validator": "^5.2.1",
     "qs": "^6.9.6",
     "react": "17.0.1",
     "react-bootstrap": "^1.5.2",
@@ -49,6 +50,7 @@
     "sass": "^1.32.7",
     "sharethis-reactjs": "^1.6.0",
     "slick-carousel": "^1.8.1",
-    "spinners-react": "^1.0.4"
+    "spinners-react": "^1.0.4",
+    "validator": "^13.7.0"
   }
 }
