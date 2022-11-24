@@ -6,8 +6,7 @@ name: Next.js CI vc
 on:
   push:
     branches: [ vc ]
-  pull_request:
-    branches: [ vc ]
+
 
 jobs:
   build:
