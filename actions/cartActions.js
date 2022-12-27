@@ -71,7 +71,7 @@ export const addToCart = (product, newQty) => {
         }))
 
 
-        axios.post( process.env.NEXT_PUBLIC_API_URL+"/order/checkcartproducts",{items})
+        axios.post( process.env.NEXT_PUBLIC_API_URL+"/order/checkCartProducts",{items})
         .then(async res=>{
             //console.log(res.data.check);
             let checks =res.data.check.filter(check=>check.success == false)

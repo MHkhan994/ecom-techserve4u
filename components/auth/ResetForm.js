@@ -72,7 +72,7 @@ function ResetForm({ email }) {
         }
         setErrors(null)
         setIsLoading(true)
-        axios.patch('/user/password/reset/', { email, otp: values.otp, password: values.password })
+        axios.patch('/user/resetPassword/', { email, otp: values.otp, password: values.password })
             .then(res => {
                 if (res.data.success) {
                     notificationFunc("success", "Password changed successfully")

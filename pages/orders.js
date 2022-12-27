@@ -61,7 +61,7 @@ function orders() {
 
 
     const requestRefund = () => {
-        axios.patch("/order/refundrequest/", { invoice: invoice_no, type: order.orderStatus })
+        axios.patch("/order/refundRequest/", { invoice: invoice_no, type: order.orderStatus })
             .then(res => {
                 setOrder(res.data.order);
             })

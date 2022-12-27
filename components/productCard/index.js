@@ -28,7 +28,7 @@ function ProductCard({ product }) {
                                     : "https://via.placeholder.com/250"
                             }
 
-                            alt=""
+                            alt="Product"
                         />
                     </a>
                 </Link>

@@ -43,7 +43,7 @@ function Forgot({ handleNewPassForm }) {
 
         setErrors(null)
         setIsLoading(true)
-        axios.post('/user/password/forgot',  values )
+        axios.post('/user/forgotPassword',  values )
             .then(res => {
                 let { isOtpSend, success, token } = res.data
                 if (isOtpSend) {
@@ -78,7 +78,7 @@ function Forgot({ handleNewPassForm }) {
 
         setErrors(null)
         setIsLoading(true)
-        axios.post('/user/password/forgot', { email })
+        axios.post('/user/forgotPassword', { email })
             .then(res => {
                 let { isOtpSend, success, token } = res.data
                 if (isOtpSend) {

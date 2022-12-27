@@ -23,7 +23,7 @@ export default function Home() {
 
 
   const fetchLatestProduct = () => {
-    axios.get('/product/getproducts')
+    axios.get('/product/getProducts')
       .then(res => {
         if (res.data.success) {
           setLatestProducts(res.data.products)
@@ -35,7 +35,7 @@ export default function Home() {
       })
   }
   const fetchFeatured = () => {
-    axios.get('/product/getfeatured')
+    axios.get('/product/getFeatured')
       .then(res => {
         if (res.data.success) {
           setFeaturedProducts(res.data.products)

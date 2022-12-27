@@ -15,7 +15,7 @@ class ComponentToPrint extends React.Component {
                                 <table>
                                     <tr>
                                         <td className="title">
-                                            <img src="./logo.png" style={{ width: "100%", maxWidth: "300px" }} />
+                                            <img src="/logo.png" style={{ width: "100%", maxWidth: "300px" }} />
                                         </td>
 
                                         <td>

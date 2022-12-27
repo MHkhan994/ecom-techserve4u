@@ -36,7 +36,7 @@ function ProductDeatils({ product, campDiscount }) {
         //console.log(data);
 
         if (data.category) {
-            axios.post('/product/getrealated', data)
+            axios.post('/product/getRelated', data)
                 .then(res => {
                     setRelatedProducts(res.data.products);
                 })

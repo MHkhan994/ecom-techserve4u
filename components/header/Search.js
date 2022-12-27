@@ -14,7 +14,7 @@ function Search() {
             if (query === '') {
                 return setSearchedProducts([])
             }
-            axios.get(`/product/getsearchproducts?search=${query.trim()}`)
+            axios.get(`/product/getSearchProducts?search=${query.trim()}`)
                 .then(res => {
                     setSearchedProducts(res.data.products);
                    
