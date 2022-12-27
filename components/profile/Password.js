@@ -18,7 +18,7 @@ function Password() {
             newPassword,
             confirmPassword
         }
-        axios.patch("/user/changepassword",data)
+        axios.patch("/user/changePassword",data)
         .then(res=>{
             notificationFunc("success", res.data.message)
         })

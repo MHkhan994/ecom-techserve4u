@@ -59,7 +59,7 @@ function Paypal({ shippingCost,addressId,paymentMethods }) {
 
   const execute = (data, actions) => {
     // 2. Make a request to your server
-    return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/order/paymentsuccess`, {
+    return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/order/paymentSuccess`, {
       paymentID: data.paymentID,
       payerID: data.payerID,
       items,

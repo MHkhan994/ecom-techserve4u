@@ -11,7 +11,7 @@ function OrderLists() {
     const [orders, setOrders] = useState([])
     const { invoice_no } = Router.query
     useEffect(() => {
-        axios.get('/order/myorder')
+        axios.get('/order/myOrders')
             .then(res => {
                 setOrders(res.data.orders);
                 if (!Router.query.invoice_no) {

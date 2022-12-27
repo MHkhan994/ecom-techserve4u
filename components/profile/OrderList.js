@@ -61,7 +61,7 @@ function OrderList() {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('/order/myorder')
+    axios.get('/order/myOrders')
       .then(res => {
         setAllOrders(res.data.orders);
         setFilteredOrders(res.data.orders);
