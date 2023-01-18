@@ -39,8 +39,10 @@ function NotificationList() {
   const notificationLists = (
     <List
       // header={<p>Messages</p>}
-      className="notification_list"
-      size="small"
+      // className="notification_list"
+      style={{ backgroundColor: '#F7F8FA', width: '400px', borderRadius: '7px' }}
+      
+      size="large"
       itemLayout="horizontal"
       dataSource={notifications}
       renderItem={noti => (
@@ -54,11 +56,12 @@ function NotificationList() {
         </List.Item>
       )}
     />
+    
   );
 
   return (
     <>
-      <Dropdown overlay={notificationLists} trigger={['click']}>
+      <Dropdown overlay={notificationLists} trigger={['click']} placement="bottomRight">
         <Badge count={notifications && notifications.filter(noti => !noti.opened).length} >
           <span><i className="far fa-bell"></i></span>
         </Badge>
