@@ -1,10 +1,10 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Header from '../components/header/Header.js'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import ProductCard from '../components/productCard/index.js'
 import { SpinnerCircularFixed } from 'spinners-react';
-import { Menu, Checkbox, Pagination, Select ,Input} from 'antd';
+import { Menu, Checkbox, Pagination, Select, Input } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import Drawer from '@material-ui/core/Drawer';
 const { SubMenu } = Menu;
@@ -35,6 +35,11 @@ function search() {
     const [variationsToShow, setVariationsToShow] = useState({})
 
     const [priceRange, setPriceRange] = useState({ min: 0, max: 0 })
+    const [min, setMin] = useState(null);
+    const [max, setMax] = useState(null)
+    
+    const maxRef = useRef(null)
+    const minRef = useRef(null)
 
 
     const [total, setTotal] = useState(0)
@@ -51,8 +56,11 @@ function search() {
     const fetchProducts = (options) => {
         setIsLoading(true)
 
+        console.log('options', options);
+
         axios.post('/product/filter', options)
             .then(res => {
+                console.log('data', res.data);
                 reset()
                 setProducts(res.data.products);
                 setProductsToShow(res.data.products);
@@ -139,11 +147,10 @@ function search() {
     const handleCloseDrawer = () => {
         setOpen(false)
     }
-
-const [min, setMin] = useState(0)
-
-const maxRef = useRef(null)
-const minRef = useRef(null)
+    
+    console.log('min', min);
+    console.log('max', max);
+    console.log('minmax', minRef?.input?.value, maxRef?.input?.value);
 
 
     const FilterList = () => {
@@ -155,16 +162,21 @@ const minRef = useRef(null)
                     </div>
                     <div className="filtercontent">
                         <div className="filterprice">
-                            <div  className="d-flex align-items-center justify-content-between">
-                                <Input ref={minRef}  name='min' type="number" step="1" placeholder="Min price" className="priceinput" />
+                            <div className="d-flex align-items-center justify-content-between">
+                                {/* <Input ref={minRef} name='min' type="number" step="1" placeholder="Min price" className="priceinput" /> */}
+                                <Input className="priceinput" placeholder="Min price" type="text" onChange={e => setMin(e.target.value)} value={min} />
                                 <span className="mx-2"> to </span>
-                                <Input ref={maxRef} name='max' type="number" step="1" placeholder="Max price" className="priceinput" />
+                                <Input className="priceinput" value={max} placeholder="Max price" type="number" step="1" onChange={(e) => setMax(e.target.value)}></Input>
+                                {/* <Input ref={maxRef} name='max' type="number" step="1" placeholder="Max price" className="priceinput" /> */}
                                 <button onClick={(e) => {
                                     e.preventDefault()
+                                    // {
+                                    //     (minRef.current.state.value && maxRef.current.state.value) && Router.push(`/search?min=${minRef.current.state.value || 0}&max=${maxRef.current.state.value || 0}`)
+                                    // }
                                     {
-                                        maxRef.current.state.value && minRef.current.state.value &&  Router.push(`/search?max=${maxRef.current.state.value||0}&min=${minRef.current.state.value||0}`)
+                                        (min && max && Router.push(`/search?min=${min || 0}&max=${max || 0}`))
                                     }
-                                   
+
                                 }} className="primary_btn">GO</button>
                             </div>
                         </div>
@@ -175,10 +187,10 @@ const minRef = useRef(null)
                 <div className="filtersection">
                     <div className="filtertitle">
                         Category
-                                </div>
+                    </div>
                     <div className="filtercontent">
 
-                    {
+                        {
                             categoriesToShow.length > 0 && categoriesToShow.map(cat => {
                                 return (
                                     <div key={cat._id}>
@@ -264,7 +276,7 @@ const minRef = useRef(null)
                 <div className="filtersection">
                     <div className="filtertitle">
                         Brands
-                                </div>
+                    </div>
                     <div className="filtercontent">
                         {
                             brandsToShow.length > 0 && brandsToShow.map(brand => {
