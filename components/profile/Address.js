@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Table, Space, Popconfirm, message } from 'antd';
+import { Table, Space, Popconfirm, message, notification } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import AddressModal from '../adressModal/AddressModal';
-import {useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAddresses } from '../../actions/generalActions';
 
 
 
@@ -13,6 +14,7 @@ function Address() {
     const { addresses } = useSelector(state => state.general)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
+    const dispatch = useDispatch();
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -31,20 +33,22 @@ function Address() {
         let array = [...addresses]
         let index = array.findIndex(a => a._id === address._id)
         array[index] = address
-        setAddresses(array)
+        // setAddresses(array)
         setSelectedAddress(null)
     }
 
-    const handleDelete=(id)=>{
-        axios.delete('/address/delete/'+id)
-        .then(res=>{
-            if(res.data.success){
-                let array = [...addresses]
-                let index = array.findIndex(a => a._id === id)
-                array.splice(index,1)
-                setAddresses(array)
-            }
-        })
+    const handleDelete = (id) => {
+        axios.delete('/address/delete/' + id)
+            .then(res => {
+                if (res.data.success) {
+                    let array = [...addresses]
+                    let index = array.findIndex(a => a._id === id)
+                    array.splice(index, 1)
+                    // setAddresses(array)
+                    dispatch(fetchAddresses());
+                    notification.success({ message: 'Address Deleted Successfully' })
+                }
+            })
     }
 
     const columns = [
@@ -87,7 +91,7 @@ function Address() {
                     <span onClick={() => handleSelected(record)} style={{ cursor: 'pointer' }}><EditOutlined /></span>
                     <Popconfirm
                         title="Are you sure to delete this Address?"
-                        onConfirm={()=>handleDelete(record._id)}
+                        onConfirm={() => handleDelete(record._id)}
                         okText="Yes"
                         cancelText="No"
                     >
@@ -122,10 +126,10 @@ function Address() {
                     </div>
 
                 </div>
-                <div style={{overflow:"auto"}}>
-                <Table  columns={columns} dataSource={addresses} />
+                <div style={{ overflow: "auto" }}>
+                    <Table columns={columns} dataSource={addresses} />
                 </div>
-                
+
             </div>
         </>
     )
