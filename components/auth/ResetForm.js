@@ -129,13 +129,13 @@ function ResetForm({ email }) {
                 </Form.Item>
 
                 <Form.Item
-                    label="Ppassword"
+                    label="New password"
                     name="password"
                     className="label"
                     validateStatus={errors && errors.password ? "error" : "succcess"}
                     help={errors && errors.password ? errors.password : null}
                 >
-                    <Input.Password placeholder='Enter your password' />
+                    <Input.Password placeholder='Enter new password' />
                 </Form.Item>
 
 
@@ -146,7 +146,7 @@ function ResetForm({ email }) {
                     validateStatus={errors && errors.confirm ? "error" : "succcess"}
                     help={errors && errors.confirm ? errors.confirm : null}
                 >
-                    <Input.Password placeholder='enter your confirm password' />
+                    <Input.Password placeholder='Enter your confirm password' />
                 </Form.Item>
 
 
