@@ -24,6 +24,8 @@ const configureAxiosHeader = () => {
 
 
 
+
+
 const AuthAndAxiso = (AuthComponent) => {
   return class Authenticated extends Component {
     static async getInitialProps(ctx) {
