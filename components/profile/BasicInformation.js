@@ -3,6 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import axios from 'axios'
 import { notificationFunc } from '../global/notification'
+import PhoneInput from 'react-phone-input-2'
+import ReactPhoneInput from 'react-phone-input-2'
+import { AsYouType, parsePhoneNumber } from 'libphonenumber-js';
+// import 'react-phone-input-2/lib/style.css'
+
+import 'react-phone-input-2/lib/material.css'
+// import "react-phone-input-2/dist/style.css";
 
 
 function BasicInformation() {
@@ -17,7 +24,8 @@ function BasicInformation() {
     const [createdAt, setCreatedAt] = useState('')
     const [email, setEmail] = useState('')
     const [isEdit, setIsEdit] = useState(false)
-    const [isEditEmail, setIsEditEmail] = useState(false)
+    const [isEditEmail, setIsEditEmail] = useState(false);
+    const [phoneError, setPhoneError] = useState('');
 
     const reset = () => {
         if (user) {
@@ -43,7 +51,9 @@ function BasicInformation() {
             gender: gender === 'N/A' ? "" : gender,
             birthDate
         }
-        axios.patch('/user/update', data)
+
+        if(phoneError.length === 0) {
+            axios.patch('/user/update', data)
             .then(res => {
                 if (res.data.success) {
                     dispatch({
@@ -57,6 +67,10 @@ function BasicInformation() {
             .catch(err => {
                 err && err.response && notificationFunc("error", err.response.data.error)
             })
+        } else {
+            
+            notificationFunc("error", "Phone must be USA/Canada")
+        }
     }
     const saveEmail = () => {
         if (!email) {
@@ -80,6 +94,57 @@ function BasicInformation() {
                 err && err.response && notificationFunc("error", err.response.data.error)
             })
     }
+
+
+    function generate18YearBefore() {
+        let currentDate = new Date();
+        const year = currentDate.getFullYear() - 18;
+        const month = currentDate.getMonth();
+        const day = currentDate.getDate();
+
+        const targetDate = new Date(year, month, day);
+
+        const monthFormat = targetDate.toLocaleDateString();
+
+        // convert from 6/1/2005 to 2005/01/06
+
+        const parts = monthFormat.split("/");
+
+        //.slice(-2) method in JavaScript is used to extract the last two characters from a string
+        const convertedDate = parts[2] + '-' + ('0' + parts[0]).slice(-2) + '-' + ('0' + parts[1]).slice(-2);
+
+        return convertedDate;
+
+    }
+
+    // let day = objectDate.getDate();
+    // let month = objectDate.getMonth();
+    // month +=1;
+    // let year = objectDate.getFullYear();
+
+    // if (month < 10)
+    //     month = '0' + month.toString();
+    // if (day < 10)
+    //     day = '0' + day.toString();
+
+    // let fromToday = year.toString() + "-" + month + "-" + day;
+
+    useEffect(() => {
+        if(contactNumber == 1) {
+            setPhoneError('')
+        }
+    }, [contactNumber])
+
+    const setPhoneValidation = () => {
+        let numberArr = contactNumber.split('');
+        const parsed = parseInt(numberArr[0])
+        if (parsed !== 1) {
+            setPhoneError("Number should have prefix 1")
+        } else {
+            setPhoneError('');
+        }
+    }
+
     return (
         <>
             <div className='mb-5'>
@@ -97,10 +162,19 @@ function BasicInformation() {
 
                 </div>
                 <div className="section_content">
-                    <div className="single_item">
+                    {/* <div className="single_item">
                         <span className="key">Mobile Number:</span>
-                        <input disabled={!isEdit} onChange={e=>setMobile(e.target.value)} value={mobile && mobile} className="value"></input>
-                    </div>
+                        <PhoneInput
+                            country={'us'}
+                            onlyCountries={["us", "ca"]}
+                            disabled={!isEdit}
+                            value={mobile}
+                            className="value"
+                            inputStyle={{ border: "1px solid #ddd", height: '10px', width: "100%", backgroundColor: '#e0e0e0' }}
+                            onChange={mobile => setMobile(mobile)}
+                            specialLabel={false}
+                        />
+                    </div> */}
                     <div className="single_item">
                         <span className="key">Name:</span>
                         <input onChange={(e) => setName(e.target.value)} disabled={!isEdit} value={name} className="value"></input>
@@ -109,25 +183,55 @@ function BasicInformation() {
                                         <span className="key">Last Name:</span>
                                         <span className="value">Alam</span>
                                     </div> */}
-                    <div className="single_item">
+                    <div className="section_content_phone">
                         <span className="key">Contact Number:</span>
-                        <input placeholder='Your contact number' onChange={(e) => setContactNumber(e.target.value)} disabled={!isEdit} value={contactNumber && contactNumber} className="value"></input>
+                        {/* <input placeholder='Your contact number' onChange={(e) => setContactNumber(e.target.value)} disabled={!isEdit} value={contactNumber && contactNumber} className="value"></input> */}
+
+                        <div>
+                            <PhoneInput
+                                country={'us'}
+                                onlyCountries={["us", "ca"]}
+                                disabled={!isEdit}
+                                // placeholder="Enter phone number"
+                                value={contactNumber}
+                                className="value"
+                                // countryCodeEditable={false}
+                                inputStyle={{ border: "1px solid #ddd", height: '10px', width: "100%", backgroundColor: '#e0e0e0' }}
+                                // onChange={handlePhone}
+                                onChange={mobile => {
+                                    setContactNumber(mobile);
+                                    setPhoneValidation();
+                                }}
+                                specialLabel={false}
+                                disableAreaCodes
+
+                            // onChange={(e) => console.log(e)}
+                            />
+
+                            {phoneError.length > 0 && <span style={{ color: 'red' }}>{phoneError}</span>}
+
+                        </div>
+
                     </div>
+
                     <div className="single_item">
                         <span className="key">Gender:</span>
                         <select onChange={(e) => setGender(e.target.value)} disabled={!isEdit} value={gender ? gender : "N/A"} className="value w-100">
-                            <option value="N/A">select your gender</option>
+                            <option value="N/A">Select your gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-                            <option value="other">other</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 
                     <div className="single_item">
-                        <span className="key">Dte Of Birth:</span>
+                        <span className="key">Date Of Birth:</span>
                         {
                             !isEdit ? <input disabled={!isEdit} value={birthDate ? moment(birthDate).format("DD MMM YYYY") : "N/A"} className="value"></input> :
-                                <input onChange={(e) => setBirthDate(e.target.value)} type='date' value={birthDate ? birthDate : "N/A"} className="value"></input>
+                                <input onChange={(e) => setBirthDate(e.target.value)} type='date' value={birthDate ? birthDate : "N/A"} className="value"
+                                    // max='2005-05-01'
+                                    max={generate18YearBefore()}
+                                ></input>
                         }
 
 
