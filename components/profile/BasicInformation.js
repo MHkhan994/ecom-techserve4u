@@ -68,6 +68,7 @@ function BasicInformation() {
                 err && err.response && notificationFunc("error", err.response.data.error)
             })
         } else {
+            
             notificationFunc("error", "Phone must be USA/Canada")
         }
     }
