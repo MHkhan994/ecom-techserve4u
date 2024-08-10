@@ -10,7 +10,7 @@ function brands() {
             <Header />
             <div id="brands_page">
                 <div className="main_container">
-                    <Card style={{marginTop:"20px"}} title={<h3>Brands</h3>}>
+                    <Card style={{ marginTop: "20px" }} title={<h3>Brands</h3>}>
                         <div className="shop_by">
                             <div className="shop_by_content">
                                 {
@@ -18,10 +18,10 @@ function brands() {
                                         return (
                                             <div key={index} className="brand_cat_card">
                                                 <Link href={`/search?brand=${item.slug}`}>
-                                                    <a>
+                                                    <div>
                                                         <img src={item.image ? item.image : "https://via.placeholder.com/200"} alt="" />
                                                         <span>{item.name}</span>
-                                                    </a>
+                                                    </div>
                                                 </Link>
 
                                             </div>

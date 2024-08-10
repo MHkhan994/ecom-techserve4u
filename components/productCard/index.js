@@ -18,7 +18,7 @@ function ProductCard({ product }) {
                 }
 
                 <Link href={`/product/${product?.slug ? product.slug : "sample"}`}>
-                    <a>
+                    <div>
                         <Image
                             width={500}
                             height={500}
@@ -30,11 +30,11 @@ function ProductCard({ product }) {
 
                             alt="Product"
                         />
-                    </a>
+                    </div>
                 </Link>
             </div>
             <Link href={`/product/${product?.slug ? product.slug : "sample"}`}>
-                <a>
+                <div>
                     <div className="product_info">
                         <div className="rating">
                             <Rating size="small" precision={0.5} readOnly defaultValue={0} value={product.average} />
@@ -63,7 +63,7 @@ function ProductCard({ product }) {
 
                         {/* <span>$ {product?.price ? product.price : "1200"}</span> */}
                     </div>
-                </a>
+                </div>
             </Link>
             {/* <div className="card_footer">
            <span><i className="fas fa-eye"></i></span>

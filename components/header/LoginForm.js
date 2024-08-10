@@ -91,8 +91,8 @@ const LoginForm = () => {
           <div className='g_auth'>
             <GoogleAuth />
           </div>
-          <span className='register'> Dont't have an account ? <Link href="/auth/register"><a>Register now!</a></Link></span>
-          <span className='register'> Forgot your password ? <Link href="/auth/forgot-password"><a>Reset now!</a></Link></span>
+          <span className='register'> Dont't have an account ? <Link href="/auth/register">Register now!</Link></span>
+          <span className='register'> Forgot your password ? <Link href="/auth/forgot-password">Reset now!</Link></span>
         </div>
       </Form>
     </div>

@@ -23,7 +23,7 @@ function MobileBottomNav() {
                 <span>Cart</span>
             </span>
             <span className="middle_icon">
-                <Link href='/'><a>D</a></Link>
+                <Link href='/'>D</Link>
             </span>
             <span onClick={() => isAuthenticated ? Router.push('/user/profile') : Router.push('/auth/login')}>
                 <i className="far fa-user"></i>

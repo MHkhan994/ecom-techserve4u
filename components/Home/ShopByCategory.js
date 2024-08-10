@@ -8,9 +8,9 @@ function ShopByCategory({ title, data }) {
             <div className="section_heading">
                 <h5>{title}</h5>
                 <Link href="/categories">
-                <a className="primary_btn m-1" >View all</a>
+                    <p className="primary_btn m-1" >View all</p>
                 </Link>
-                
+
             </div>
             <div className="shop_by_content">
                 {
@@ -18,10 +18,10 @@ function ShopByCategory({ title, data }) {
                         return (
                             <div key={index} className="brand_cat_card">
                                 <Link href={`/search?category=${item.slug}`}>
-                                    <a>
+                                    <div>
                                         <img src={item.categoryImage ? item.categoryImage : "https://via.placeholder.com/200"} alt="" />
                                         <span>{item.name}</span>
-                                    </a>
+                                    </div>
                                 </Link>
 
                             </div>

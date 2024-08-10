@@ -386,7 +386,7 @@ function ProductInfo({ product, campDiscount }) {
                         </div>
                         {campaign && <div className="brand">
                             <span className="key"> Campaign: </span>
-                            <Link href={`/campaign/${campaign.slug}`}><a><span>{campaign.name}</span></a></Link>
+                            <Link href={`/campaign/${campaign.slug}`}><span>{campaign.name}</span></Link>
                         </div>}
                         <div className="brand">
                             <span className="key"> Brand: </span>

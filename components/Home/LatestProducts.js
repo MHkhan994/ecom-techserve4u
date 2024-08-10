@@ -7,13 +7,13 @@ function LatestProducts({ array, title, hidetitle }) {
     return (
         <div className="shop_by">
 
-            
+
             <div className="section_heading">
-            <h5>{title}</h5>
+                <h5>{title}</h5>
                 {
                     !hidetitle &&
                     <Link href="/search">
-                        <a className="primary_btn m-1">View all</a>
+                        <p className="primary_btn m-1">View all</p>
                     </Link>
                 }
             </div>

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -9,7 +9,7 @@ function Search() {
     const [searchedProducts, setSearchedProducts] = useState([])
 
     useEffect(() => {
-        
+
         const delayed = setTimeout(() => {
             if (query === '') {
                 return setSearchedProducts([])
@@ -17,12 +17,12 @@ function Search() {
             axios.get(`/product/getSearchProducts?search=${query.trim()}`)
                 .then(res => {
                     setSearchedProducts(res.data.products);
-                   
+
                 })
-                .catch(err=>{
+                .catch(err => {
                     setSearchedProducts([])
                 })
-                
+
         }, 100)
         return () => {
             clearTimeout(delayed)
@@ -30,10 +30,10 @@ function Search() {
     }, [query])
 
     useEffect(() => {
-       if(query === '' && searchedProducts.length>0){
-           setSearchedProducts([])
-       }
-    }, [query,searchedProducts])
+        if (query === '' && searchedProducts.length > 0) {
+            setSearchedProducts([])
+        }
+    }, [query, searchedProducts])
 
     let handleKey = (e) => {
 
@@ -43,7 +43,7 @@ function Search() {
             Router.push(`/search?query=${query.trim()}`)
         }
     }
-    const handlePush=()=>{
+    const handlePush = () => {
         setSearchedProducts([])
         Router.push(`/search?query=${query.trim()}`)
     }
@@ -60,7 +60,7 @@ function Search() {
                         searchedProducts.length > 0 && searchedProducts.map((product, index) => {
                             return (
                                 <Link key={index} href={`/product/${product.slug}`}>
-                                    <a>
+                                    <div>
                                         <div className="items">
                                             <img src={product.thumbnail}></img>
                                             <h5>{product.name}</h5>
@@ -82,7 +82,7 @@ function Search() {
 
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </Link>
 
 

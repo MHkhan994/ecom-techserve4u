@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Alert } from 'antd';
-import { Form, Input, Button, Checkbox,Spin } from 'antd';
+import { Form, Input, Button, Checkbox, Spin } from 'antd';
 import Header from '../../components/header/Header';
 import Cookies from "js-cookie";
 import Link from 'next/link'
@@ -96,20 +96,20 @@ const Login = () => {
 
 
           <div className='g_auth'>
-            <button  className="primary_btn my-3" disabled={loading} type="primary" htmlType="submit">
+            <button className="primary_btn my-3" disabled={loading} type="primary" htmlType="submit">
               Login
               {
-                loading && <Spin size='small' style={{marginLeft:"10px"}} />
+                loading && <Spin size='small' style={{ marginLeft: "10px" }} />
               }
-             
-        </button>
-        <div className='g_auth'>
-            <GoogleAuth />
+
+            </button>
+            <div className='g_auth'>
+              <GoogleAuth />
+            </div>
+            <span className='register'> Dont't have an account ? <Link href="/auth/register">register now!</Link></span>
+            <span className='register'>Forgot your password ? <Link href="/auth/forgot-password">Reset now!</Link></span>
           </div>
-            <span className='register'> Dont't have an account ? <Link href="/auth/register"><a>register now!</a></Link></span>
-            <span className='register'>Forgot your password ? <Link href="/auth/forgot-password"><a>Reset now!</a></Link></span>
-          </div>
-          
+
         </Form>
       </div>
     </>

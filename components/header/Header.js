@@ -20,18 +20,18 @@ export default function Header() {
     const dispatch = useDispatch()
     const { user, isAuthenticated } = useSelector(state => state.auth)
     const { cartItems } = useSelector(state => state.cart)
-    const {categories} = useSelector(state => state.general)
+    const { categories } = useSelector(state => state.general)
     const Router = useRouter()
 
-    
+
 
     const [userDrawerOpen, setUserDrawerOpen] = useState(false)
     const [anchor, setAnchor] = useState(null);
     const [showDropCat, setShowDropCat] = useState(false)
 
- 
 
-   
+
+
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(getNotifications());
@@ -80,7 +80,7 @@ export default function Header() {
     };
 
 
-   
+
     return (
         <>
             <div className="top_nav">
@@ -111,10 +111,10 @@ export default function Header() {
                         <div className="main_container">
                             <div className="logo">
                                 <i onClick={() => setUserDrawerOpen(true)} className="fas fa-bars mr-3"></i>
-                                <Link href="/"><a><img src='/logo.png'></img></a></Link>
+                                <Link href="/"><p><img src='/logo.png'></img></p></Link>
                                 {/* <Link href="/"><a>Protocol Inc</a></Link> */}
                             </div>
-                           
+
 
                             <Search />
 
@@ -127,7 +127,7 @@ export default function Header() {
 
                                 </span>
                                 {
-                                    isAuthenticated &&  <NotificationComp />
+                                    isAuthenticated && <NotificationComp />
                                 }
                                 <span onClick={handleClickUser}><i className="far fa-user"></i></span>
                             </div>
@@ -149,9 +149,9 @@ export default function Header() {
 
                             </div>
                             <div className="pages_list">
-                                <li><Link href="/campaigns"><a >Campaigns</a></Link></li>
-                                <li><Link href="/brands"><a>Brands</a></Link></li>
-                                <li><Link href="/categories"><a>Categories</a></Link></li>
+                                <li><Link href="/campaigns">Campaigns</Link></li>
+                                <li><Link href="/brands">Brands</Link></li>
+                                <li><Link href="/categories">Categories</Link></li>
                                 <li><a href="#">Help</a></li>
                                 <li><a href="#">FAQ</a></li>
                             </div>
@@ -161,7 +161,7 @@ export default function Header() {
                     </nav>
                 </div>
 
-                <MobileHeader setUserDrawerOpen={()=>setUserDrawerOpen(true)} />
+                <MobileHeader setUserDrawerOpen={() => setUserDrawerOpen(true)} />
             </header>
             <MobileBottomNav />
             <CartDrawer />

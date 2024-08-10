@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import {Tag} from 'antd'
+import { Tag } from 'antd'
 import moment from 'moment'
 
 
@@ -39,7 +39,7 @@ function OrderLists() {
                         orders.map((order, index) => {
                             return (
                                 <Link key={index} href={`/orders?invoice_no=${order.invoice}`}>
-                                    <a>
+                                    <div>
                                         <div className={`order_item ${invoice_no && invoice_no === order.invoice && "active"}`}>
                                             <div className="order_row">
                                                 <h4 className="invoice">{order.invoice}</h4>
@@ -55,7 +55,7 @@ function OrderLists() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </Link>
                             )
                         })

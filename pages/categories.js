@@ -15,13 +15,13 @@ function categories() {
                         {
                             categories && categories.map((cat, index) => {
                                 return (
-                                    <Card 
-                                    className="mb-3" 
-                                    key={index} 
-                                    title={ <Link href={`/search?category=${cat.slug}`}>
-                                    <a>{cat.name}</a>
-                                </Link>}>
-                                       
+                                    <Card
+                                        className="mb-3"
+                                        key={index}
+                                        title={<Link href={`/search?category=${cat.slug}`}>
+                                            {cat.name}
+                                        </Link>}>
+
                                         <div className="row">
                                             {
                                                 cat.children.length > 0 && cat.children.map((sub, index2) => {
@@ -29,7 +29,7 @@ function categories() {
 
                                                         <div key={index2} className="col-6 col-lg-4">
                                                             <Link href={`/search?category=${sub.slug}`}>
-                                                                <a className="sub_cat">{sub.name}</a>
+                                                                <p className="sub_cat">{sub.name}</p>
                                                             </Link>
                                                             <ul>
                                                                 {
@@ -37,7 +37,7 @@ function categories() {
                                                                         return (
                                                                             <li key={index3}>
                                                                                 <Link href={`/search?category=${sub2.slug}`}>
-                                                                                    <a className="subsub" >{sub2.name}</a>
+                                                                                    <p className="subsub" >{sub2.name}</p>
                                                                                 </Link>
                                                                             </li>
                                                                         )

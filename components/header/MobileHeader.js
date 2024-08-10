@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Search from './Search'
 import Link from 'next/link'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import NotificationComp from './NotificationComp'
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -17,10 +17,10 @@ function MobileHeader({ setUserDrawerOpen }) {
                 <div className="mobile_logo">
 
                     <Link href='/'>
-                        <a>
-                            <img src='/logo.png'></img>
-                            {/* Protocol Inc */}
-                        </a>
+
+                        <img src='/logo.png'></img>
+                        {/* Protocol Inc */}
+
                     </Link>
                 </div>
                 <div className="search_logo">
@@ -30,14 +30,14 @@ function MobileHeader({ setUserDrawerOpen }) {
                     <i onClick={() => setIsSearch(!isSearch)} className="fas fa-search"></i>
                 </div>
             </div>
-            
+
             <AnimatePresence>
                 {isSearch && (
                     <motion.div
-                        initial={{ opacity: 0 ,height:0}}
-                        animate={{ opacity: 1 ,height:0}}
-                        exit={{ opacity: 0 ,height:0}}
-                        transition={{duration:0.5}}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 0 }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.5 }}
                     >
                         <Search />
                     </motion.div>

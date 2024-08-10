@@ -1,10 +1,10 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { Button, Modal,Input } from 'antd'
+import { Button, Modal, Input } from 'antd'
 import axios from 'axios'
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
-import {notificationFunc} from '../global/notification'
+import { notificationFunc } from '../global/notification'
 
 
 const labels = {
@@ -16,7 +16,7 @@ const labels = {
 };
 
 
-function OrderDetails({order}) {
+function OrderDetails({ order }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [rating, setRating] = useState(5)
     const [comment, setComment] = useState("")
@@ -26,7 +26,7 @@ function OrderDetails({order}) {
     const [hover, setHover] = React.useState(-1);
 
     const showModal = (product) => {
-     
+
         axios.get(`/review/getsingle/${product.productId}/${order._id}`)
             .then(res => {
                 if (res.data.hasReview) {
@@ -40,30 +40,30 @@ function OrderDetails({order}) {
             .catch(err => {
                 console.log(err);
             })
-        
+
     };
 
     const handleSave = () => {
-        if(!selectedProduct){
+        if (!selectedProduct) {
             return alert("No product selected")
         }
-        let data ={
+        let data = {
             rating,
             comment,
-            order:order._id,
-            product:selectedProduct.productId
+            order: order._id,
+            product: selectedProduct.productId
         }
 
-        axios.post('/review/create',data)
-        .then(res=>{
-            if(res.data.success){
-                handleCancel()
-                notificationFunc("success","Review saved successfully")
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        axios.post('/review/create', data)
+            .then(res => {
+                if (res.data.success) {
+                    handleCancel()
+                    notificationFunc("success", "Review saved successfully")
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     const handleCancel = () => {
@@ -76,21 +76,21 @@ function OrderDetails({order}) {
     };
     return (
         <>
-         <Modal 
-            zIndex={1111}
-            title={`Review for ${selectedProduct && selectedProduct.productName}`} 
-            visible={isModalVisible} 
-            onCancel={handleCancel}
-            footer={[
-                <Button key="back" onClick={()=>handleCancel()}>
-                  Cancel
-                </Button>,
-                <Button key="submit" type="primary" loading={false} onClick={()=>handleSave()}>
-                  Submit
-                </Button>,
-              ]}
+            <Modal
+                zIndex={1111}
+                title={`Review for ${selectedProduct && selectedProduct.productName}`}
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                footer={[
+                    <Button key="back" onClick={() => handleCancel()}>
+                        Cancel
+                    </Button>,
+                    <Button key="submit" type="primary" loading={false} onClick={() => handleSave()}>
+                        Submit
+                    </Button>,
+                ]}
             >
-                <div style={{display:"flex",alignItems:"center"}}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                     <Rating
                         name="hover-feedback"
                         value={rating}
@@ -103,7 +103,7 @@ function OrderDetails({order}) {
                     />
                     {rating !== null && <Box ml={2}>{labels[hover !== -1 ? hover : rating]}</Box>}
                 </div>
-                <Input.TextArea placeholder="Write your review" value={comment}  onChange={(e)=>setComment(e.target.value)}/>
+                <Input.TextArea placeholder="Write your review" value={comment} onChange={(e) => setComment(e.target.value)} />
             </Modal>
 
 
@@ -133,12 +133,12 @@ function OrderDetails({order}) {
                                                     </div>
                                                     <div className="">
                                                         <Link href={`/product/${item.productSlug}`}>
-                                                            <a >
-                                                                <p className="">{item.productName}</p>
-                                                            </a>
+
+                                                            <p className="">{item.productName}</p>
+
                                                         </Link>
-{
-                                                            order.orderStatus === 'delivered' &&  <button onClick={() => showModal(item)} style={{ padding: "2px 10px" }} className='primary_outline_btn'>Review</button>
+                                                        {
+                                                            order.orderStatus === 'delivered' && <button onClick={() => showModal(item)} style={{ padding: "2px 10px" }} className='primary_outline_btn'>Review</button>
                                                         }
                                                     </div>
                                                 </div>

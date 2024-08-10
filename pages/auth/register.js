@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert,Spin } from 'antd';
+import { Alert, Spin } from 'antd';
 import axios from 'axios'
 import { Form, Input, Button, Checkbox, notification } from 'antd';
 import Header from '../../components/header/Header';
@@ -128,7 +128,7 @@ const Register = () => {
                     <div className='g_auth'>
                         <GoogleAuth />
                     </div>
-                    <span className='register'>Already have an account ? <Link href="/auth/login"><a>Login now!</a></Link></span>
+                    <span className='register'>Already have an account ? <Link href="/auth/login">Login now!</Link></span>
                 </div>
 
 

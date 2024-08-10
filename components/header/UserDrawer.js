@@ -36,8 +36,8 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
                     <div className="avatar">
                         {
                             isAuthenticated ?
-                            <img src={user.profilePicture || "https://via.placeholder.com/80"} alt="" />:
-                            <img src={"https://via.placeholder.com/80"} alt="" />
+                                <img src={user.profilePicture || "https://via.placeholder.com/80"} alt="" /> :
+                                <img src={"https://via.placeholder.com/80"} alt="" />
                         }
                         <div className='name_mobile'>
                             <p>{user.name}</p>
@@ -49,12 +49,12 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
 
                         {
                             isAuthenticated ? <>
-                                <Link href="/user/profile"><a className="login">My account</a></Link>
+                                <Link href="/user/profile"><p className="login">My account</p></Link>
                                 <span className='logout' onClick={() => handleLogout()}>Logout</span>
                             </>
                                 : <>
-                                    <Link href="/auth/login"><a className="login">Login</a></Link>
-                                    <Link href="/auth/register"><a className="register">register</a></Link>
+                                    <Link href="/auth/login"><p className="login">Login</p></Link>
+                                    <Link href="/auth/register"><p className="register">register</p></Link>
 
                                 </>
                         }
@@ -68,45 +68,45 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
                     <div className="list_content">
                         <li className="list_item">
                             <Link href="/">
-                                <a className="list_item_link" >
+                                <p className="list_item_link" >
                                     <span><i className="fas fa-home"></i></span>
                                     <p>Home</p>
-                                </a>
+                                </p>
                             </Link>
 
                         </li>
                         <li className="list_item">
                             <Link href="/campaigns">
-                                <a className="list_item_link" href="#">
+                                <p className="list_item_link" href="#">
                                     <span><i className="fas fa-gift"></i></span>
                                     <p>Campaigns</p>
-                                </a>
+                                </p>
                             </Link>
                         </li>
                         <li className="list_item">
                             <Link href="/brands">
-                                <a className="list_item_link">
+                                <p className="list_item_link">
                                     <span><i className="fa fa-list-alt"></i></span>
                                     <p>All Brands</p>
-                                </a>
+                                </p>
                             </Link>
                         </li>
                         <li className="list_item">
                             <Link href="/categories">
-                                <a className="list_item_link">
+                                <p className="list_item_link">
                                     <span><i className="fas fa-th-list"></i></span>
                                     <p>All Categories</p>
-                                </a>
+                                </p>
                             </Link>
                         </li>
                         {
                             isAuthenticated &&
                             <li className="list_item">
                                 <Link href="/orders">
-                                    <a className="list_item_link" href="#">
+                                    <p className="list_item_link" href="#">
                                         <span><i className="fas fa-truck-moving"></i></span>
                                         <p>Track Order</p>
-                                    </a>
+                                    </p>
                                 </Link>
 
                             </li>
@@ -133,10 +133,10 @@ export default function UserDrawer({ userDrawerState, closeUserDrawer, onCloseUs
 
                                     <li key={index} className="list_item">
                                         <Link href={`/search?category=${cat.slug}`}>
-                                            <a className="list_item_link" >
+                                            <p className="list_item_link" >
                                                 {/* <span><i className="fas fa-home"></i></span> */}
                                                 <p>{cat.name}</p>
-                                            </a>
+                                            </p>
                                         </Link>
                                     </li>
 
