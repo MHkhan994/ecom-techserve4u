@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { SpinnerCircularFixed } from 'spinners-react';
-import {fetchCategories,fetchBrands,fetchAddresses} from '../actions/generalActions'
+import { fetchCategories, fetchBrands, fetchAddresses } from '../actions/generalActions'
 
 //import {setToast} from './ToastMsg'
 import store from "../store";
@@ -60,7 +60,7 @@ const AuthAndAxiso = (AuthComponent) => {
       configureAxiosHeader();
       store.dispatch(fetchCategories())
       store.dispatch(fetchBrands())
-      
+
 
       const token = Cookies.get("myshop_auth2")
       //console.log(token);
@@ -105,7 +105,7 @@ const AuthAndAxiso = (AuthComponent) => {
         <div>
           {this.state.isLoading ? (
             <div style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center" }}>
-             <SpinnerCircularFixed style={{ margin: "0 auto" }} size={100} thickness={160} speed={100} color="#36D7B7" secondaryColor="rgba(0, 0, 0, .05)" />
+              <SpinnerCircularFixed style={{ margin: "0 auto" }} size={100} thickness={160} speed={100} color="#36D7B7" secondaryColor="rgba(0, 0, 0, .05)" />
             </div>
           ) : (
             <AuthComponent {...this.props} userData={this.state.userData} />

@@ -10,7 +10,7 @@ function ProductCard({ product }) {
             <div className="product_image">
                 {
                     product?.discount?.value > 0 &&
-                    <span class="discount-tag-in-percent">
+                    <span className="discount-tag-in-percent">
                         - {product.discount.discountType === 'percent' ? product.discount.value :
                             Math.floor((product.discount.value / product.price) * 100)
                         }%

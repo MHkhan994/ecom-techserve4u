@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form, Input, Radio, Select, } from 'antd';
 const { Option } = Select;
 import axios from 'axios'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 const layout = {
     labelCol: {
         span: 6,
@@ -27,8 +27,8 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
             .then(res => {
                 if (res.data.success) {
                     dispatch({
-                        type:"ADD_NEW_ADDRESSES",
-                        payload:res.data.address
+                        type: "ADD_NEW_ADDRESSES",
+                        payload: res.data.address
                     })
                     form.resetFields();
                     setLoading(false)
@@ -89,7 +89,7 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
         <>
             <Modal
                 confirmLoading={loading}
-                visible={isModalVisible}
+                open={isModalVisible}
                 title={editId ? "Update Address" : "Add New Address"}
                 okText={editId ? "Update" : "Create"}
                 cancelText="Cancel"
@@ -131,9 +131,9 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
                         label="Address"
                         validateStatus={error && error.address ? "error" : "succcess"}
                         help={error && error.address ? error.address : null}
-                       
+
                     >
-                        <Input.TextArea  placeholder="Street address,apt,suite,building,floor,etc." />
+                        <Input.TextArea placeholder="Street address,apt,suite,building,floor,etc." />
                     </Form.Item>
 
                     <Form.Item
@@ -190,10 +190,10 @@ function AddressModal({ isModalVisible, handleCancel, selectedAddress, sendUpdat
                     >
                         <Input />
                     </Form.Item>
-                    
-                    
-                    
-                    
+
+
+
+
                 </Form>
             </Modal>
         </>

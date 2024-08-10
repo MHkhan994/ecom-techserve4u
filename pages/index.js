@@ -113,24 +113,24 @@ export default function Home() {
             <div className="col-lg-9 col-md-12">
 
               <div className='slider_container'>
-                 <SliderComp />
+                <SliderComp />
                 <div className="site_info_policy">
                   <div className="info_item">
-                    <div className="icon"><i class="fas fa-rocket"></i></div>
+                    <div className="icon"><i className="fas fa-rocket"></i></div>
                     <div className='text'>
                       <span>Free shipping</span>
                       <span>From $99.00</span>
                     </div>
                   </div>
                   <div className="info_item">
-                    <div className="icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <div className="icon"><i className="fas fa-hand-holding-usd"></i></div>
                     <div className='text'>
                       <span>Money Guarantee</span>
                       <span>30 days back</span>
                     </div>
                   </div>
                   <div className="info_item">
-                    <div className="icon"><i class="fas fa-umbrella"></i></div>
+                    <div className="icon"><i className="fas fa-umbrella"></i></div>
                     <div className='text'>
                       <span>100% Safe</span>
                       <span>Secure shopping</span>
@@ -165,10 +165,10 @@ export default function Home() {
             pageStart={currentCatIndex}
             loadMore={() => loadCatProd()}
             hasMore={hasmore}
-            loader={ <div className="loader" key={0}>Loading ...</div>}
+            loader={<div className="loader" key={0}>Loading ...</div>}
           >
             {
-             cats.length > 0 && cats.map((cat, index) => {
+              cats.length > 0 && cats.map((cat, index) => {
                 return (
                   <section key={index} className="my-3">
                     <ProductByCategory setLoadingProd={setLoadingProd} category={cat} />

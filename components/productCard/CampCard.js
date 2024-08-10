@@ -19,7 +19,7 @@ function CampCard({ product, _id }) {
             <div className="product_image">
                 {
                     discount?.value > 0 &&
-                    <span class="discount-tag-in-percent">
+                    <span className="discount-tag-in-percent">
                         - {discount.discountType === 'percent' ? discount.value :
                             Math.floor((discount.value / product.price) * 100)
                         }%
