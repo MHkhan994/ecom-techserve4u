@@ -20,12 +20,6 @@ const configureAxiosHeader = () => {
 };
 
 
-
-
-
-
-
-
 const AuthAndAxiso = (AuthComponent) => {
   return class Authenticated extends Component {
     static async getInitialProps(ctx) {
@@ -86,7 +80,7 @@ const AuthAndAxiso = (AuthComponent) => {
             this.setState({ isLoading: false });
             err && err.response && console.log(err.response.data.error, "error")
             Cookies.remove("myshop_auth2");
-            err && err.response.data && err.response.data.error && alert(err.response.data.error)
+            err && err.response?.data && err.response.data.error && alert(err.response.data.error)
             store.dispatch({
               type: "LOGOUT"
             })

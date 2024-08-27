@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import GoogleLogin from 'react-google-login';
 import SetPassword from './SetPassword';
 import Cookies from "js-cookie";
 import { notificationFunc } from '../global/notification'
 
-function GoogleAuth({from}) {
+function GoogleAuth({ from }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tokenId, setTokenId] = useState(null);
     const [password, setPassword] = useState('')
@@ -36,10 +36,12 @@ function GoogleAuth({from}) {
                 err && err.response && setPassError(err.response.data)
             })
     }
-    
+
     const responseGoogle = (data) => {
+        console.log(data.tokenId)
         axios.post('/user/googleauth', { tokenId: data.tokenId })
             .then(res => {
+                console.log(res)
                 if (res.data.requiredPassword) {
                     setIsModalVisible(true)
                     setTokenId(res.data.tokenId)
@@ -57,14 +59,14 @@ function GoogleAuth({from}) {
             <GoogleLogin
                 clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
                 render={renderProps => (
-                        <div onClick={renderProps.onClick} disabled={renderProps.disabled} className="google-btn">
+                    <div onClick={renderProps.onClick} disabled={renderProps.disabled} className="google-btn">
                         <div className="google-icon-wrapper">
                             <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
                         </div>
-                           <p className="btn-text"><b>Sign in with google</b></p>
+                        <p className="btn-text"><b>Sign in with google</b></p>
                     </div>
-                    
-                    
+
+
                 )}
                 onSuccess={responseGoogle}
                 onFailure={(err) => console.log(err)}

@@ -19,9 +19,6 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([])
 
 
-
-
-
   const fetchLatestProduct = () => {
     axios.get('/product/getProducts')
       .then(res => {

@@ -12,7 +12,7 @@ function CategoryDropdown({ categories }) {
                         return (
                             <li key={index}>
                                 <Link href={`/search?category=${cat.slug}`}>
-                                    <a>{cat.name}<i className="fa fa-arrow-right"></i></a>
+                                    {cat.name}<i className="fa fa-arrow-right"></i>
                                 </Link>
                                 <div className={cat.children.length === 0 ? "sub_cat_container hide" : "sub_cat_container"}>
                                     {
@@ -29,7 +29,7 @@ function CategoryDropdown({ categories }) {
                                                                 return (
                                                                     <li key={index3}>
                                                                         <Link href={`/search?category=${sub2.slug}`}>
-                                                                            <a >{sub2.name}</a>
+                                                                            {sub2.name}
                                                                         </Link>
                                                                     </li>
                                                                 )

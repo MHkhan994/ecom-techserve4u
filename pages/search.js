@@ -37,7 +37,7 @@ function search() {
     const [priceRange, setPriceRange] = useState({ min: 0, max: 0 })
     const [min, setMin] = useState(null);
     const [max, setMax] = useState(null)
-    
+
     const maxRef = useRef(null)
     const minRef = useRef(null)
 
@@ -147,11 +147,13 @@ function search() {
     const handleCloseDrawer = () => {
         setOpen(false)
     }
-    
+
     console.log('min', min);
     console.log('max', max);
     console.log('minmax', minRef?.input?.value, maxRef?.input?.value);
 
+
+    console.log(variationsToShow)
 
     const FilterList = () => {
         return (

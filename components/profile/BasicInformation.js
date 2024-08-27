@@ -27,21 +27,6 @@ function BasicInformation() {
     const [isEditEmail, setIsEditEmail] = useState(false);
     const [phoneError, setPhoneError] = useState('');
 
-    const reset = () => {
-        if (user) {
-
-            setMobile(user.mobile)
-            setName(user.name)
-            setContactNumber(user.contactNumber || '')
-            setGender(user.gender)
-            setBirthDate(user.birthDate || '')
-            setEmail(user.email || '')
-            setCreatedAt(user.createdAt)
-        }
-    }
-    useEffect(() => {
-        reset()
-    }, [user])
 
     const saveGeneralInfo = () => {
         let data = {
@@ -52,23 +37,23 @@ function BasicInformation() {
             birthDate
         }
 
-        if(phoneError.length === 0) {
+        if (phoneError.length === 0) {
             axios.patch('/user/update', data)
-            .then(res => {
-                if (res.data.success) {
-                    dispatch({
-                        type: "SET_USER",
-                        payload: res.data.user
-                    })
-                    setIsEdit(false)
-                    notificationFunc("success", "Profile updated")
-                }
-            })
-            .catch(err => {
-                err && err.response && notificationFunc("error", err.response.data.error)
-            })
+                .then(res => {
+                    if (res.data.success) {
+                        dispatch({
+                            type: "SET_USER",
+                            payload: res.data.user
+                        })
+                        setIsEdit(false)
+                        notificationFunc("success", "Profile updated")
+                    }
+                })
+                .catch(err => {
+                    err && err.response && notificationFunc("error", err.response.data.error)
+                })
         } else {
-            
+
             notificationFunc("error", "Phone must be USA/Canada")
         }
     }
@@ -130,7 +115,7 @@ function BasicInformation() {
     // let fromToday = year.toString() + "-" + month + "-" + day;
 
     useEffect(() => {
-        if(contactNumber == 1) {
+        if (contactNumber == 1) {
             setPhoneError('')
         }
     }, [contactNumber])

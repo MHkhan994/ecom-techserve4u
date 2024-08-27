@@ -1,5 +1,5 @@
 import "../styles/main.scss"
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
@@ -8,8 +8,8 @@ import App from 'next/app'
 import { createWrapper } from 'next-redux-wrapper'
 import store from '../store'
 import AuthAndAxios from '../helper/auth'
-import {updateCart} from '../actions/cartActions'
-import {config} from '../actions/generalActions'
+import { updateCart } from '../actions/cartActions'
+import { config } from '../actions/generalActions'
 
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
@@ -21,7 +21,7 @@ Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on(
 
 
 class MyApp extends App {
-  componentDidMount(){
+  componentDidMount() {
     store.dispatch(updateCart());
     config()
   }

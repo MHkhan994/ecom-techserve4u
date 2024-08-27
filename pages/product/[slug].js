@@ -40,10 +40,14 @@ function ProductDeatils({ product, campDiscount }) {
                 .then(res => {
                     setRelatedProducts(res.data.products);
                 })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }, [product])
 
 
+    console.log(product)
 
 
     return (
@@ -61,7 +65,7 @@ function ProductDeatils({ product, campDiscount }) {
                             description: 'This is react js ecommerce website',
                             images: [
                                 {
-                                    url:product.meta.image || product.thumbnail,
+                                    url: product.meta.image || product.thumbnail,
                                     width: 800,
                                     height: 600,
                                     alt: 'Og Image Alt',
@@ -91,9 +95,9 @@ function ProductDeatils({ product, campDiscount }) {
                             <SideInfo />
                         </div>
                         <section className="my-2">
-                         
-                                <LatestProducts hidetitle={true} title="Related products" array={relatedProducts} />
-    
+
+                            <LatestProducts hidetitle={true} title="Related products" array={relatedProducts} />
+
                         </section>
                     </div>
                 </div>

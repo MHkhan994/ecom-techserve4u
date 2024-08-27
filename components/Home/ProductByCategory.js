@@ -21,6 +21,8 @@ function ProductByCategory({ category, setLoadingProd }) {
         }
 
     }, [category])
+
+
     const prod = () => (
         <div className="shop_by">
             <div className="section_heading">

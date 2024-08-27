@@ -10,7 +10,6 @@ import { notificationFunc } from '../../components/global/notification'
 import GoogleAuth from '../../components/auth/GoogleAuth';
 
 
-
 const layout = {
     labelCol: {
         span: 6,
@@ -99,7 +98,7 @@ const Register = () => {
                     label="Email"
                     name="email"
                     className="label"
-                    validateStatus={error && error.email ? "error" : "succcess"}
+                    // validateStatus={error && error.email ? "error" : "succcess"}
                     help={error && error.email ? error.email : null}
                 >
                     <Input placeholder="enter your email" />
